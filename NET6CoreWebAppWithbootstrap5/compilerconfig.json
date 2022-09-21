@@ -1,0 +1,26 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/theme/base/light.css",
+    "inputFile": "wwwroot/css/theme/base/light.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/theme/base/dark.css",
+    "inputFile": "wwwroot/css/theme/base/dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/theme/army/light.css",
+    "inputFile": "wwwroot/css/theme/army/light.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/theme/army/dark.css",
+    "inputFile": "wwwroot/css/theme/army/dark.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/theme/navy/light.css",
+    "inputFile": "wwwroot/css/theme/navy/light.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/theme/navy/dark.css",
+    "inputFile": "wwwroot/css/theme/navy/dark.scss"
+  }
+]

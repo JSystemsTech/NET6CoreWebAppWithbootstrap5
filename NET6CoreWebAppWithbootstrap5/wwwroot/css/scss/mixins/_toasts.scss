@@ -1,0 +1,18 @@
+﻿@import '../../../lib/bootstrap/scss/bootstrap-utilities.scss';
+
+@mixin toast-custom-variant(
+$toast-header-bg,
+$toast-header-color-custom: color-contrast($toast-header-bg),
+$toast-body-bg: $toast-background-color,
+$toast-body-color: $toast-color, 
+$toast-border-color-custom: $toast-border-color
+) {
+    background-color: $toast-body-bg;
+    color: $toast-body-color;
+    border: $toast-border-color-custom;
+
+    .toast-header {
+        color: $toast-header-color-custom;
+        background-color: $toast-header-bg;
+    }
+}

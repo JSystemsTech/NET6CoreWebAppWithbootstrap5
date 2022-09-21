@@ -1,0 +1,80 @@
+﻿@import "dataTables-fontawesome-variables";
+@mixin bootstrap-pagination-button($icon) {
+    display: inline-block;
+    font-family: $dt-sort-font-family;
+    content: fa-content($icon);
+    font-weight: $dt-icon-font-weight;
+}
+@mixin bootstrap-pagination-button-before($icon) {
+    a:before {
+        @include bootstrap-pagination-button($icon);
+        padding-right: $dt-paginiate-gutter;
+    }
+}
+@mixin bootstrap-pagination-button-after($icon) {
+    a:after {
+        @include bootstrap-pagination-button($icon);
+        padding-left: $dt-paginiate-gutter;
+    }
+}
+
+table.table.dataTable thead th {
+    &.sorting,
+    &.sorting_asc,
+    &.sorting_desc {
+        &:before {
+            content: "";
+        }
+
+        &:after {
+            top: 0.5em;
+            font-family: $dt-sort-font-family;
+            font-weight: $dt-icon-font-weight;
+        }
+    }
+
+    &.sorting:after {
+        content: fa-content($dt-icon-sort);
+    }
+
+    &.sorting_asc:after {
+        content: fa-content($dt-icon-sort-asc);
+        opacity: 1;
+    }
+
+    &.sorting_desc:after {
+        content: fa-content($dt-icon-sort-desc);
+        opacity: 1;
+    }
+}
+div.dataTables_info {
+    font-size: 0.7rem;
+}
+div.dataTables_paginate li {
+    a.page-link {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+        line-height: 1.5;
+    }
+
+    &.first {
+        @include bootstrap-pagination-button-before($dt-icon-paginate-first);
+    }
+
+    &.previous {
+        @include bootstrap-pagination-button-before($dt-icon-paginate-previous);
+    }
+
+    &.next {
+        @include bootstrap-pagination-button-after($dt-icon-paginate-next);
+    }
+
+    &.last {
+        @include bootstrap-pagination-button-after($dt-icon-paginate-last);
+    }
+}
+table.table.table-sm {
+    th,td {
+        font-size:0.8em;
+    }
+}

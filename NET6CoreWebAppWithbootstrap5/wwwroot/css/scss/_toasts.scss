@@ -1,0 +1,5 @@
+﻿@each $state, $value in $theme-colors {
+    .toast.toast-#{$state} {
+        @include toast-custom-variant($value);
+    }    
+}

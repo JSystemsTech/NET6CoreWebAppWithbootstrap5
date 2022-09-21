@@ -1,0 +1,38 @@
+﻿@model Offcanvas
+@using NET6CoreWebAppWithbootstrap5.Models
+
+@{
+    string IdBase = Html.UniqueId();
+    string backdrop = Model.Backdrop && Model.Static ? "static" : Model.Backdrop ? "true" : "false";
+    string keyboard = Model.Keyboard ? "true" : "false";
+    string focus = Model.Focus ? "true" : "false";
+    string scroll = Model.Scroll ? "true" : "false";
+    string size = OffcanvasSize.Map(Model.Size);
+    string placement = OffcanvasPlacement.Map(Model.Placement);
+
+    HtmlString ariaDescribedBy = new HtmlString(!string.IsNullOrWhiteSpace(Model.Description) ? $" aria-describedBy=\"{IdBase}Description\"" : "");
+}
+@if (!string.IsNullOrWhiteSpace(Model.Description))
+{
+    <div id="@(IdBase)Description" class="sr-only">@Model.Description</div>
+}
+<div class="offcanvas @(size) @(placement) @(Model.Animation ? $" {Model.AnimationClass}":"")" id="@IdBase" aria-hidden="true" aria-labelledby="@(IdBase)Label" @(ariaDescribedBy) tabindex="-1" data-bs-backdrop="@backdrop" data-bs-keyboard="@keyboard" data-bs-focus="@focus" data-bs-scroll="@scroll">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="@(IdBase)Label">@Model.Title</h5>
+        @if (Model.Close)
+                {
+        <button type="button" class="btn btn-link" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa fa-times"></i></button>
+                }
+    </div>
+    <div class="offcanvas-body small">
+        @if (!string.IsNullOrWhiteSpace(Model.Loading))
+        {
+        <div class="w-100 text-center">
+            <div class="spinner-border text-primary" style="width: 6rem; height: 6rem;" role="status">
+                <span class="visually-hidden">@Model.Loading</span>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+

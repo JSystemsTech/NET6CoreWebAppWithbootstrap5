@@ -1,0 +1,125 @@
+﻿@import '../../../lib/bootstrap/scss/bootstrap-utilities.scss';
+@import '_dropdown.scss';
+// Navbar
+//
+// Provide a static navbar from which we expand to create full-width, fixed, and
+// other navbar variations.
+$navbar-custom-hover-color-scale: 30%;
+$navbar-custom-active-color-scale: 10%;
+@mixin navbar-custom-variant($custom-prefix, $bg-color, $color: color-contrast($bg-color), $hover-color: shift-color($color, $navbar-custom-hover-color-scale), $active-color: shift-color($color, $navbar-custom-active-color-scale)) {
+    $navbar-custom-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") ;
+    .navbar.navbar-#{$custom-prefix} {
+        --#{$prefix}navbar-custom-#{$custom-prefix}-color: #{$color};
+
+        --#{$prefix}navbar-custom-#{$custom-prefix}-hover-color: #{$hover-color};
+
+        --#{$prefix}navbar-custom-#{$custom-prefix}-active-color: #{$active-color};
+
+        --#{$prefix}navbar-custom-#{$custom-prefix}-text-link-color: #{shift-color($color, 20%)};
+
+        --#{$prefix}navbar-custom-#{$custom-prefix}-toggler-icon-bg: #{escape-svg($navbar-custom-toggler-icon-bg)};
+        
+        @include gradient-bg($bg-color);
+        padding-top: 0;
+        padding-bottom: 0;
+
+        form.navbar-form {
+            padding-top: 0.1rem;
+            padding-bottom: 0.1rem;
+
+            .btn-navbar {
+                @include button-variant(tint-color($bg-color, 30%), $color);
+            }
+            .btn-navbar-outline {
+                @include button-outline-variant($color);
+            }
+        }
+
+        .navbar-brand {
+            color: var(--#{$prefix}navbar-custom-#{$custom-prefix}-color);
+
+            &:hover,
+            &:focus {
+                color: var(--#{$prefix}navbar-custom-#{$custom-prefix}-color);
+                opacity: 0.75;
+            }
+        }
+        // Navbar nav
+        //
+        // Custom navbar navigation (doesn't require `.nav`, but does make use of `.nav-link`).
+        form.navbar-form,
+        .navbar-nav .nav-item.dropdown {
+            @include dropdown-custom-variant(tint-color($bg-color, 30%));
+        } 
+        .navbar-nav {
+            
+            .nav-link {
+                padding-top: 0.6rem;
+                padding-bottom: 0.6rem;
+                color: var(--#{$prefix}navbar-custom-#{$custom-prefix}-active-color);
+
+                &:hover,
+                &:focus {
+                    background-color: shift-color($bg-color, 10%);
+                    color: var(--#{$prefix}navbar-custom-#{$custom-prefix}-hover-color);
+                }
+
+                &.active {
+                    font-weight: bold;
+                }
+                // Disabled state lightens text
+                &.disabled {
+                    color: var(--#{$prefix}navbar-custom-#{$custom-prefix}-disabled-color);
+                }
+            }
+        }
+
+        .navbar-text {
+            color: var(--#{$prefix}navbar-custom-#{$custom-prefix}-color);
+
+            a {
+                color: var(--#{$prefix}navbar-custom-#{$custom-prefix}-color);
+                opacity: 0.9;
+
+                &:hover,
+                &:focus {
+                    opacity: 0.7;
+                }
+            }
+        }
+        .navbar-toggler{
+            color: var(--#{$prefix}navbar-custom-#{$custom-prefix}-color);
+            border: var(--bs-border-width) solid var(--#{$prefix}navbar-custom-#{$custom-prefix}-color);
+            .navbar-toggler-icon {
+                background-image: var(--#{$prefix}navbar-custom-#{$custom-prefix}-toggler-icon-bg);
+            }
+        }
+    }
+}
+
+@mixin navbar-size-variant($navbar-size-padding-y, $navbar-size-font-size) {
+    .navbar-brand {
+        padding-top: $navbar-size-padding-y;
+        padding-bottom: $navbar-size-padding-y;
+        @include font-size($navbar-size-font-size * 1.3);
+    }
+
+    .navbar-nav {
+        @include rfs($navbar-size-font-size);
+    }
+
+    .navbar-text, .nav-link {
+        padding-top: $navbar-size-padding-y !important;
+        padding-bottom: $navbar-size-padding-y !important;
+    }
+
+    .navbar-text {
+        @include font-size($navbar-size-font-size);
+    }
+
+    form.navbar-form {
+        .form-check-label {
+            @include font-size($navbar-size-font-size);
+        }
+    }
+}

@@ -1,0 +1,326 @@
+﻿@import '../../lib/bootstrap/scss/bootstrap-utilities.scss';
+@import '../scss/dataTables-fontawesome-bootstrap5.scss';
+$enable-dark-mode: false !default;
+
+$main: $primary !default;
+$unclassified: #5cb85c !default;
+$classified: #d9534f !default;
+$theme-colors: map-merge(("main":$main,"unclassified":$unclassified,"classified":$classified), $theme-colors);
+
+$image-scale: ( xs: 2em, sm: 2.5em, md: 3em, lg: 4em, xl: 6em, xxl: 15em ) !default;
+$image-root-path: "/images/" !default;
+$image-map: ( "logo": "logo.png" ) !default;
+
+$theme-colors-shift-weight: () !default;
+$theme-colors-shift-weight-base: if($enable-dark-mode, ( "dark": -15% ), ( "light": 7% ));
+$theme-colors-shift-weight-final: map-merge($theme-colors-shift-weight-base,$theme-colors-shift-weight);
+
+$table-bg-scale: if($enable-dark-mode, -20%, 0%);
+// scss-docs-end table-variables
+
+// scss-docs-start table-loop
+$table-variants-custom: () !default;
+$table-variants: map-merge((
+    "main": shift-color($main, $table-bg-scale), 
+    "unclassified": shift-color($unclassified, $table-bg-scale),
+    "classified": shift-color($classified, $table-bg-scale),
+    "primary": shift-color($primary, $table-bg-scale), 
+    "secondary": shift-color($secondary, $table-bg-scale), 
+    "success": shift-color($success, $table-bg-scale), 
+    "info": shift-color($info, $table-bg-scale), 
+    "warning": shift-color($warning, $table-bg-scale), 
+    "danger": shift-color($danger, $table-bg-scale), 
+    "light": shift-color($light, if($enable-dark-mode, 10%, 0%)), 
+    "dark": shift-color($dark, if($enable-dark-mode, -5%, 0%)) 
+),$table-variants-custom);
+
+$body-bg-light: $white !default;
+$body-bg-dark: $gray-900 !default;
+
+$body-bg: if($enable-dark-mode, $body-bg-dark, $body-bg-light);
+$body-color: color-contrast($body-bg);
+
+$md-bg: $body-bg;
+$code-bg: shade-color($body-bg, 10%);
+
+$toast-background-color-opacity: .90 !default;
+$toast-background-color-base: $white !default;
+
+@function map-get-value($map, $key, $default-value) {
+    $return-value: $default-value !default;
+
+    @if map-has-key($map, $key) {
+        $return-value: map-get($map, $key);
+    }
+
+    @return $return-value;
+}
+
+@function shift-theme-color($key) {
+    $color: map-get($theme-colors, $key) !default;
+    $weight: map-get-value($theme-colors-shift-weight-final,$key, 0%);
+
+    @if $weight != 0% {
+        $color: shift-color($color, $weight);
+    }
+
+    @return $color;
+}
+
+@function get-table-variant-color($value) {
+    @return shift-color($value, $theme-variant-weight);
+}
+
+@function shift-color-to-rgb($value, $weight) {
+    @return to-rgb(shift-color($value, $weight));
+}
+
+@if $enable-dark-mode {
+    $body-bg-900: tint-color($body-bg, 10%);
+    $body-bg-800: tint-color($body-bg, 20%);
+    $body-bg-700: tint-color($body-bg, 30%);
+    $body-bg-600: tint-color($body-bg, 40%);
+    $body-bg-500: tint-color($body-bg, 50%);
+    $body-bg-400: tint-color($body-bg, 60%);
+    $body-bg-300: tint-color($body-bg, 70%);
+    $body-bg-200: tint-color($body-bg, 80%);
+
+    $theme-colors-rgb: map-loop($theme-colors, shift-color-to-rgb, "$value", -20%);
+
+    $component-active-bg: $body-bg-600 !default;
+    $component-active-color: color-contrast($component-active-bg);
+
+    $enable-shadows: true;
+    $enable-gradients: false;
+    $enable-responsive-font-sizes: true;
+
+    // scss-docs-start box-shadow-variables
+    $box-shadow: 0 .5rem 1rem rgba($white, .15);
+    $box-shadow-sm: 0 .125rem .25rem rgba($white, .075);
+    $box-shadow-lg: 0 1rem 3rem rgba($white, .175);
+    $box-shadow-inset: inset 0 1px 2px rgba($white, .075);
+
+    $alert-bg-scale: -10%;
+    $alert-border-scale: -60%;
+    $alert-color-scale: 40%;
+
+    $link-shade-percentage: 20%;
+    $link-color: $body-bg-300;
+    $link-hover-color: shift-color($link-color, $link-shade-percentage);
+       
+
+    $input-bg: $body-bg-800;
+    $input-focus-bg: $input-bg;
+    $input-focus-color: color-contrast($input-focus-bg);
+    $input-disabled-bg: $body-bg-900;
+
+    $input-disabled-border-color: $body-bg-700;
+    $input-color: shade-color($input-focus-color, 20%);
+    $input-plaintext-color: $body-color;
+
+    $input-box-shadow: $box-shadow-inset;
+    $form-select-box-shadow: $box-shadow-inset;
+    $form-range-track-box-shadow: $box-shadow-inset;
+    $dropdown-box-shadow: $box-shadow;
+    $popover-box-shadow: $box-shadow;
+    $toast-box-shadow: $box-shadow;
+    $modal-content-box-shadow-xs: $box-shadow-sm;
+    $modal-content-box-shadow-sm-up: $box-shadow;
+    $progress-box-shadow: $box-shadow-inset;
+    $thumbnail-box-shadow: $box-shadow-sm;
+
+    $input-border-color: $body-bg-600;
+    $input-focus-border-color: tint-color($component-active-bg, 20%);
+    $input-btn-focus-color-opacity: 0.7;
+    $input-btn-focus-color: rgba($component-active-bg, $input-btn-focus-color-opacity);
+    $input-btn-focus-box-shadow: 0 0 $input-btn-focus-blur $input-btn-focus-width $input-btn-focus-color;
+    $input-focus-box-shadow: $input-btn-focus-box-shadow;
+
+
+    $input-group-addon-color: color-contrast($body-bg-600);
+    $input-group-addon-bg: $body-bg-600;
+    $input-group-addon-border-color: $body-bg-400;
+
+
+    // scss-docs-start form-select-variables
+    $form-select-color: $input-color;
+    $form-select-bg: $input-bg;
+    $form-select-disabled-color: null;
+    $form-select-disabled-bg: $body-bg-200;
+    $form-select-indicator-color: $body-bg-400;
+    $form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>");
+
+
+    $form-select-border-color: $input-border-color;
+    $form-select-focus-border-color: $input-focus-border-color;
+    // scss-docs-end form-select-variables
+
+
+    $nav-tabs-link-active-color: $component-active-color;
+    $nav-tabs-link-active-bg: $component-active-bg;
+    $nav-tabs-link-active-border-color: $body-bg-600 $body-bg-600 $nav-tabs-link-active-bg;
+    $nav-tabs-border-color: $body-bg-600;
+    $nav-tabs-link-hover-border-color: $body-bg-600 $body-bg-600 $nav-tabs-border-color;
+
+    $nav-pills-link-active-color: $component-active-color;
+    $nav-pills-link-active-bg: $component-active-bg;
+
+
+    // Navs
+
+    // scss-docs-start nav-variables
+    $nav-link-color: $link-color;
+    $nav-link-hover-color: $link-hover-color;
+    $nav-link-disabled-color: $body-bg-600;
+
+
+    $table-bg: $body-bg-800;
+    $table-color: $body-bg-300;
+    $table-dark-bg: $body-bg;
+    $table-dark-color: $body-color;
+    $table-border-color: $body-bg-600;
+    $table-dark-accent-bg: rgba($body-color, .05);
+    $table-dark-hover-bg: rgba($body-color, .075);
+    $table-dark-border-color: $body-bg-200;
+
+    $table-striped-color: $table-color;
+    $table-striped-bg-factor: .07;
+    $table-striped-bg: rgba($white, $table-striped-bg-factor);
+
+    $table-active-color: $table-color;
+    $table-active-bg-factor: .1;
+    $table-active-bg: rgba($white, $table-active-bg-factor);
+
+    $table-hover-color: $table-color;
+    $table-hover-bg-factor: .075;
+    $table-hover-bg: rgba($white, $table-hover-bg-factor);
+
+    $dropdown-bg: $body-bg-700;
+    $dropdown-color: $body-bg-300;
+    $dropdown-border-color: $body-bg-600;
+    $dropdown-link-color: $link-color;
+    $dropdown-link-hover-color: shade-color($link-color, 5%);
+    $dropdown-link-hover-bg: $body-bg-600;
+    $border-color: $body-bg-500;
+
+
+
+    $nav-pills-link-active-color: $component-active-color;
+    $pagination-bg: $body-bg-600;
+    $pagination-color: color-contrast($body-bg-600);
+    $pagination-border-color: $body-bg-700;
+    $pagination-hover-bg: $body-bg-700;
+    $pagination-hover-border-color: $body-bg-800;
+    $pagination-hover-color: color-contrast($body-bg-700);
+    $pagination-disabled-color: $body-bg-500;
+    $pagination-disabled-bg: $body-bg-700;
+    $pagination-disabled-border-color: $body-bg-600;
+    $pagination-active-color: $component-active-color;
+    $pagination-active-bg: $component-active-bg;
+    $pagination-active-border-color: $pagination-active-bg;
+
+    $jumbotron-bg: $body-bg-800;
+    $jumbotron-color: $gray-300;
+    $card-border-color: $body-bg-500;
+    $card-cap-bg: rgba($white, .03);
+    $card-bg: $body-bg-800;
+    $card-color: color-contrast($card-bg);
+    $modal-content-bg: $body-bg;
+    $modal-content-color: color-contrast($modal-content-bg);
+    $modal-content-border-color: $body-bg-400;
+    $modal-backdrop-bg: $black;
+    $modal-backdrop-opacity: 0.65;
+    $progress-bg: $body-bg-700;
+    $progress-bar-color: $body-bg-200;
+    $list-group-bg: $body-bg-800;
+    $list-group-color: color-contrast($list-group-bg);
+    $list-group-border-color: $body-bg-500;
+    $list-group-hover-bg: $body-bg-800;
+    $list-group-action-color: $body-bg-600;
+    $list-group-disabled-bg: $body-bg-700;
+    $list-group-disabled-color: $body-bg-400;
+
+    $text-muted: $body-bg-500 !default;
+    $blockquote-footer-color: $body-bg-600 !default;
+
+    $navbar-dark-color-base: $white;
+    // scss-docs-start navbar-theme-variables
+    $navbar-dark-color: rgba($navbar-dark-color-base, .55);
+    $navbar-dark-hover-color: rgba($navbar-dark-color-base, .75);
+    $navbar-dark-active-color: $navbar-dark-color-base;
+    $navbar-dark-disabled-color: rgba($navbar-dark-color-base, .25);
+    $navbar-dark-toggler-border-color: rgba($navbar-dark-color-base, .1);
+
+    $navbar-light-color-base: $black;
+    $navbar-light-color: rgba($navbar-light-color-base, .55);
+    $navbar-light-hover-color: rgba($navbar-light-color-base, .7);
+    $navbar-light-active-color: rgba($navbar-light-color-base, .9);
+    $navbar-light-disabled-color: rgba($navbar-light-color-base, .3);
+    $navbar-light-toggler-border-color: rgba($navbar-light-color-base, .1);
+
+
+
+
+    //$breadcrumb-bg: $gray-700;
+    $breadcrumb-active-color: $body-bg-500;
+
+    $form-feedback-invalid-color: tint-color($danger,10%);
+    $form-feedback-icon-valid-color: tint-color($form-feedback-valid-color,10%);
+    $form-feedback-icon-valid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{shade-color($form-feedback-icon-valid-color,30%)}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/></svg>");
+    $form-feedback-icon-invalid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='#{shade-color($form-feedback-icon-invalid-color,30%)}' viewBox='0 0 12 12'><circle cx='6' cy='6' r='4.5'/><path stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/><circle cx='6' cy='8.2' r='.6' fill='#{$form-feedback-icon-invalid-color}' stroke='none'/></svg>");
+    $close-color: $body-bg-500;
+    $close-text-shadow: 0 1px 0 $body-bg-700;
+
+    // Popovers
+
+    // scss-docs-start popover-variables
+    $popover-bg: $body-bg-700;
+    $popover-border-color: tint-color($popover-bg, 50%);
+
+    $popover-header-bg: shade-color($popover-bg, 30%);
+    $popover-header-color: color-contrast($popover-header-bg);
+
+    $popover-body-color: $body-color;
+
+
+    // fusv-disable
+    // Deprecated in Bootstrap 5.2.0 for CSS variables
+    $popover-arrow-color: $popover-bg;
+    $popover-arrow-outer-color: $popover-border-color;
+    // fusv-enable
+
+    $tooltip-bg: $light;
+    $tooltip-color: color-contrast($tooltip-bg);
+
+
+    // Toasts
+
+    // scss-docs-start toast-variables
+    $toast-background-color-base: tint-color($dark,7%);
+    $toast-color: color-contrast($toast-background-color-base);
+    $toast-border-color: $body-bg-500;
+    $toast-header-background-color: rgba($body-bg-600, .85);
+    $toast-header-color: color-contrast($toast-header-background-color);
+    $toast-header-border-color: $body-bg-600;
+    // scss-docs-end toast-variables
+    $md-bg: tint-color($body-bg, 10%);
+    $code-bg: tint-color($body-bg, 10%);
+}
+$toast-background-color: rgba($toast-background-color-base, $toast-background-color-opacity);
+
+$theme-colors-shift: map-loop($theme-colors, shift-theme-color, "$key");
+$theme-colors: map-merge($theme-colors, $theme-colors-shift);
+
+.md-input {
+    color: color-contrast($md-bg) !important;
+    background-color: $md-bg !important;
+}
+
+pre code {
+    color: color-contrast($code-bg) !important;
+    background-color: $code-bg !important;
+}
+.md-preview {
+    color: color-contrast($body-bg) !important;
+    background-color: $md-bg !important;
+}

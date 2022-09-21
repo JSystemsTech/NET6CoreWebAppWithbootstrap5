@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspose.Total" Version="22.8.0" />
+    <PackageReference Include="Markdig" Version="0.30.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.9.0" />
+    <PackageReference Include="Westwind.Web.Markdown" Version="0.2.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\custom\" />
+    <Folder Include="wwwroot\lib\krajee-markdown-editor\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\docs\Index.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\AuthenticationTokenService.json" CodeGenerator="NSwagCSharp" Namespace="AuthenticationTokenService" ClassName="AuthenticationTokenServiceClient">
+      <SourceUri>http://localhost:8080/AuthenticationTokenService/api/docs/v1/AuthenticationTokenService.json</SourceUri>
+      <Options>/AdditionalNamespaceUsages:OpenAPI.ApiException /GenerateExceptionClasses:false</Options>
+    </OpenApiReference>
+    <OpenApiReference Include="OpenAPIs\CoreApplicationServicesAPI.json" CodeGenerator="NSwagCSharp" Namespace="CoreApplicationServicesAPI" ClassName="CoreApplicationServicesAPIClient">
+      <SourceUri>http://localhost:8080/CoreApplicationServicesAPI/api/docs/v1/CoreApplicationServicesAPI.json</SourceUri>
+      <Options>/AdditionalNamespaceUsages:OpenAPI.ApiException /GenerateExceptionClasses:false</Options>
+    </OpenApiReference>
+  </ItemGroup>
+
+</Project>

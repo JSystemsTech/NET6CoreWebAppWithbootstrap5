@@ -1,0 +1,33 @@
+﻿// scss-docs-start navbar-custom-modifiers
+// Generate contextual modifier classes for colorizing the custom navbar.
+
+@each $state, $value in $theme-colors {
+    @include navbar-custom-variant($state, $value);
+}
+.navbar {
+    &.navbar-sm {
+        $navbar-sm-padding-y: 0.5rem;
+        $navbar-sm-font-size: 0.7rem;
+        @include navbar-size-variant($navbar-sm-padding-y,$navbar-sm-font-size);
+
+        &.navbar-condensed {
+            @include navbar-size-variant(0.2rem, $navbar-sm-font-size);
+        }
+
+        &.navbar-flush {
+            @include navbar-size-variant(0,$navbar-sm-font-size);
+        }
+    }
+
+    &.navbar-lg {
+        $navbar-lg-padding-y: 0.8rem;
+        $navbar-lg-font-size: 1.2rem;
+        @include navbar-size-variant($navbar-lg-padding-y,$navbar-lg-font-size);
+        &.navbar-condensed {
+            @include navbar-size-variant(0.2rem, $navbar-lg-font-size);
+        }
+        &.navbar-flush {
+            @include navbar-size-variant(0,$navbar-lg-font-size);
+        }
+    }
+}

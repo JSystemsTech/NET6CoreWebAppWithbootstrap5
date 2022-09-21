@@ -1,0 +1,27 @@
+﻿$fa-font-family-fa: "Font Awesome 5 Free" !default;
+$fa-font-family-far: "Font Awesome 5 Regular" !default;
+$fa-font-family-fab: "Font Awesome 5 Brands" !default;
+$fa-font-family-default: $fa-font-family-fa !default;
+
+
+$dt-sort-font-family: $fa-font-family-default !default;
+$dt-icon-sort: "\f0dc" !default;
+$dt-icon-sort-asc: "\f0de" !default;
+$dt-icon-sort-desc: "\f0dd" !default;
+
+$dt-icon-paginate-first: "\f100" !default;
+$dt-icon-paginate-previous: "\f104" !default;
+$dt-icon-paginate-next: "\f105" !default;
+$dt-icon-paginate-last: "\f101" !default;
+$dt-icon-responsive-collapsed: "\f055" !default;
+$dt-icon-responsive-expanded: "\f056" !default;
+$dt-icon-select-unselected: "\f146" !default;
+$dt-icon-select-selected: "\f00c" !default;
+
+$dt-paginiate-gutter: 0.3em !default;
+$dt-icon-font-weight: 900 !default;
+
+// Convenience function used to set content property
+@function fa-content($fa-var) {
+    @return unquote("\"#{ $fa-var }\"");
+}

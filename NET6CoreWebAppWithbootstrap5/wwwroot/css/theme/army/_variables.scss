@@ -1,0 +1,15 @@
+﻿$primary: #e6c337;
+$secondary: #565656;
+$warning: #d4b67b;
+$danger: #9b2f25;
+$info: #2a3141;
+$success: #40492a;
+$dark: #1a1a1a;
+$light: #fffdf4;
+
+$main: $dark;
+
+$body-bg-dark: $dark;
+$component-active-bg: $primary;
+$enable-dark-mode: false !default;
+$theme-colors-shift-weight: if($enable-dark-mode, ( "main": -15%, "dark": -15%, "info": -20%, "success": -20%), ( "light": 10% ));

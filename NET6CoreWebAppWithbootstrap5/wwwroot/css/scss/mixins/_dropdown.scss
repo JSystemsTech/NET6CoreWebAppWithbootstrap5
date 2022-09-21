@@ -1,0 +1,68 @@
+﻿@import '../../../lib/bootstrap/scss/bootstrap-utilities.scss';
+
+$dropdown-custom-hover-color-scale: 30%;
+$dropdown-custom-active-color-scale: 10%;
+$dropdown-custom-disabled-color-scale: 5%;
+
+@mixin dropdown-custom-variant( 
+$bg-color, 
+$color: color-contrast($bg-color),
+$divider-bg: color-contrast($bg-color),
+$hover-bg: shift-color($bg-color, $dropdown-custom-hover-color-scale),
+$hover-color: color-contrast($hover-bg), 
+$active-bg: shift-color($bg-color, $dropdown-custom-active-color-scale), 
+$active-color: color-contrast($active-bg), 
+$disabled-bg: shift-color($bg-color, $dropdown-custom-disabled-color-scale), 
+$disabled-color: color-contrast($disabled-bg)
+) {
+    // The dropdown menu
+    .dropdown-menu {   
+      color: $color;      
+      background-color: $bg-color;
+    }
+    
+    
+    
+    // Dividers (basically an `<hr>`) within the dropdown
+    .dropdown-divider {
+      border-top: 1px solid $divider-bg;
+    }
+    
+    .dropdown-item {
+      color: $color;
+      
+    
+      &:hover,
+      &:focus {
+        color: $hover-color;
+        @include gradient-bg($hover-bg);
+      }
+    
+      &.active,
+      &:active {
+        color: $active-bg;
+        @include gradient-bg($active-color);
+      }
+    
+      &.disabled,
+      &:disabled {
+        color: $disabled-bg;
+        @include gradient-bg($disabled-color);
+      }
+    }
+    
+    
+    
+    // Dropdown section headers
+    .dropdown-header {
+      color: $color;
+    }
+    
+    // Dropdown text
+    .dropdown-item-text {
+      color: $color;
+    }
+    
+
+
+}

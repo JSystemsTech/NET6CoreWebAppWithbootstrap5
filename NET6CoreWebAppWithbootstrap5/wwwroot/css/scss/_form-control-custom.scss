@@ -1,0 +1,75 @@
+﻿//
+// General form controls (plus a few specific high-level interventions)
+//
+@each $state, $color in $theme-colors {
+    $custom-input-bg: tint-color($color, 50%);
+    $custom-input-focus-border-color: tint-color($color, 70%);
+    $custom-input-btn-focus-color-opacity: 0.25;
+    $custom-input-btn-focus-color: rgba(color-contrast($color), $custom-input-btn-focus-color-opacity);
+    $custom-input-btn-focus-box-shadow: 0 0 $input-btn-focus-blur $input-btn-focus-width $custom-input-btn-focus-color;
+    $custom-input-focus-box-shadow: $custom-input-btn-focus-box-shadow;
+
+    .form-control-#{$state},
+    .input-group-#{$state} .form-control{
+        color: $input-color;
+        background-color: $custom-input-bg;
+        border-color: color-contrast($color);
+        // Customize the `:focus` state to imitate native WebKit styles.
+        &:focus {
+            color: color-contrast($custom-input-bg);
+            background-color: $custom-input-bg;
+            border-color: color-contrast($custom-input-bg);
+            @include box-shadow($custom-input-focus-box-shadow);
+        }
+        // Placeholder
+        &::placeholder {
+            color: shade-color($custom-input-bg, 60%);
+            // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+            opacity: 1;
+        }
+    }
+    .bg-#{$state} {
+        &.card,
+        &.card .card-header,
+        &.card .card-body,
+        &.card .card-footer,
+        &.card-header,
+        &.card-body,
+        &.card-footer {
+            color: color-contrast($color);
+        }
+
+        &.card .card-header,
+        &.card .card-body,
+        &.card .card-footer,
+        &.card-header,
+        &.card-body,
+        &.card-footer {
+            border-color: shade-color($color,15%);
+        }
+
+        &.badge {
+            background-color: $color !important;
+            color: color-contrast($color);
+        }
+    }
+
+    .form-select-#{$state},
+    .input-group-#{$state} .form-select {
+        color: $form-select-color;
+        background-color: $custom-input-bg;
+        background-size: $form-select-bg-size;
+        border: $form-select-border-width solid $form-select-border-color;
+
+        &:focus {
+            border-color: $custom-input-focus-border-color;
+        }
+    }
+    .input-group-#{$state} {
+        .input-group-text {
+            background-color: tint-color($color, 20%);
+            color: color-contrast(tint-color($color, 20%));
+            border-color: color-contrast(tint-color($color, 20%));
+        }
+    }
+}

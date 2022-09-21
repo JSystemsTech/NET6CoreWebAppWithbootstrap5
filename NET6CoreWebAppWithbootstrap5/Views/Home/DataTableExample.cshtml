@@ -1,0 +1,16 @@
+﻿@{
+    string FormId = Html.UniqueId();
+}
+<form id="@FormId" class="p-2 d-none">
+    @Html.AntiForgeryToken()    
+</form>
+<div class="row">
+    <div class="col">
+        @Html.DataTable(vm =>
+        {
+        vm.Form = $"#{FormId}";
+        vm.OptionsUrl = ViewBag.DataTableOptions.DataTableExampleDataOptions;
+        //vm.AppendForm = true;
+        })
+    </div>
+</div>

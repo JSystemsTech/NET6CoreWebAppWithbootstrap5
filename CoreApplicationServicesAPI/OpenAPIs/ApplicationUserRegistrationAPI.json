@@ -1,0 +1,343 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ApplicationUserRegistrationAPI",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Login/Authenticate": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "operationId": "Authenticate",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationUserRegistrationAPIAccessTokenApplicationUserRegistrationAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Register/UserIsRegistered": {
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "UserIsRegistered",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApplicationUserRegistrationAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Register/RegisterUser": {
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "RegisterUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanApplicationUserRegistrationAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApplicationInfoParameters": {
+        "type": "object",
+        "properties": {
+          "dataBindingErrors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "hasDataBindingErrors": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "theme": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultRedirectUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "ssoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "requireRegistration": {
+            "type": "boolean"
+          },
+          "logoFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoFileContentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoFileData": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "ssO_Header": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BooleanApplicationUserRegistrationAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationUserRegistrationAPIAccessToken": {
+        "type": "object",
+        "properties": {
+          "expiresUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refreshOnUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationUserRegistrationAPIAccessTokenApplicationUserRegistrationAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/ApplicationUserRegistrationAPIAccessToken"
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterUserAdditionalFieldParameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterUserParameters": {
+        "type": "object",
+        "properties": {
+          "edipi": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleInitial": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionalField": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegisterUserAdditionalFieldParameters"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistrationFormFieldConfig": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegistrationFormFieldOptionConfig"
+            },
+            "nullable": true
+          },
+          "minLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maxLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "multiple": {
+            "type": "boolean"
+          },
+          "useSelect": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistrationFormFieldOptionConfig": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme.",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}

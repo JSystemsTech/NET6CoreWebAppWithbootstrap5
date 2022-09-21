@@ -1,0 +1,27 @@
+﻿@model NET6CoreWebAppWithbootstrap5.Models.Helpers.DataTable.DataTableViewVM
+@{
+    string tableId = string.IsNullOrWhiteSpace(Model.Id) ? Html.UniqueId() : Model.Id;
+    string formId = Model.Form;
+}
+@if (string.IsNullOrWhiteSpace(Model.Form)) {
+    formId = Html.UniqueId();
+    <form id="@formId">
+        @Html.AntiForgeryToken()
+    </form>
+}
+@Html.Table(new { @data_type = "datatable", @data_dt_options_url = Url.Action("GetDataTableOptions", new { key = Model.OptionsUrl }), @data_dt_form = string.IsNullOrWhiteSpace(Model.Form) ? $"#{formId}": Model.Form, @data_append_form=Model.AppendForm.ToString().ToLower(), @id = tableId, @class = "w-100 my-0 table-striped table-bordered table-sm" })
+
+@if (!string.IsNullOrWhiteSpace(Model.OptionsJson))
+{
+
+    <script type="text/javascript">
+    window.datatableUnobtrusiveOptions = window.datatableUnobtrusiveOptions || {}
+    window.datatableUnobtrusiveOptions['@(tableId)'] = JSON.parse('@Html.JSONSafeString(Model.OptionsJson)');
+    </script>
+}
+<script type="text/javascript">
+    if (typeof $ !== 'undefined') {
+        $('#@(tableId)').dataTableUnobtrusive();
+    }
+</script>
+

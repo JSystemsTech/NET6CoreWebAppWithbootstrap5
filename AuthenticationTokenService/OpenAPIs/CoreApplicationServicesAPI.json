@@ -1,0 +1,712 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CoreApplicationServicesAPI",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/CoreApplicationServicesAPI"
+    }
+  ],
+  "paths": {
+    "/api/APIConfig/UpdateApplicationAPIConfig": {
+      "post": {
+        "tags": [
+          "APIConfig"
+        ],
+        "operationId": "UpdateApplicationAPIConfig",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicationAPIConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationInfoCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ApplicationInfo/GetApplicationInfo": {
+      "get": {
+        "tags": [
+          "ApplicationInfo"
+        ],
+        "operationId": "GetApplicationInfo",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationInfoCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ApplicationInfo/UpdateApplicationInfo": {
+      "post": {
+        "tags": [
+          "ApplicationInfo"
+        ],
+        "operationId": "UpdateApplicationInfo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicationInfoParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationInfoCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ApplicationInfo/GetWebApplicationInfo": {
+      "get": {
+        "tags": [
+          "ApplicationInfo"
+        ],
+        "operationId": "GetWebApplicationInfo",
+        "parameters": [
+          {
+            "name": "appCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationInfoIEnumerableCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ApplicationInfo/ApplicationExists": {
+      "get": {
+        "tags": [
+          "ApplicationInfo"
+        ],
+        "operationId": "ApplicationExists",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ConnectionString/GetConnectionString": {
+      "get": {
+        "tags": [
+          "ConnectionString"
+        ],
+        "operationId": "GetConnectionString",
+        "parameters": [
+          {
+            "name": "databaseName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectionStringInfoCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Login/Authenticate": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "operationId": "Authenticate",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoreApplicationServicesAPIAccessTokenCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Register/UserIsRegistered": {
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "UserIsRegistered",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Register/RegisterUser": {
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "operationId": "RegisterUser",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanCoreApplicationServicesAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApplicationAPIConfig": {
+        "type": "object",
+        "properties": {
+          "baseUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegistrationFormFieldConfig"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationInfo": {
+        "type": "object",
+        "properties": {
+          "dataBindingErrors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "hasDataBindingErrors": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "appId": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "theme": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultRedirectUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "ssoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "requireRegistration": {
+            "type": "boolean"
+          },
+          "logoFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoFileContentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoFileData": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "ssO_Header": {
+            "type": "string",
+            "nullable": true
+          },
+          "applicationAPIConfig": {
+            "$ref": "#/components/schemas/ApplicationAPIConfig"
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationInfoCoreApplicationServicesAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/ApplicationInfo"
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationInfoIEnumerableCoreApplicationServicesAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationInfo"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationInfoParameters": {
+        "type": "object",
+        "properties": {
+          "dataBindingErrors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "hasDataBindingErrors": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "theme": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultRedirectUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "ssoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "requireRegistration": {
+            "type": "boolean"
+          },
+          "logoFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoFileContentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoFileData": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "ssO_Header": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BooleanCoreApplicationServicesAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConnectionStringInfo": {
+        "type": "object",
+        "properties": {
+          "connectionString": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConnectionStringInfoCoreApplicationServicesAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/ConnectionStringInfo"
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoreApplicationServicesAPIAccessToken": {
+        "type": "object",
+        "properties": {
+          "expiresUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refreshOnUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoreApplicationServicesAPIAccessTokenCoreApplicationServicesAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/CoreApplicationServicesAPIAccessToken"
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterUserAdditionalFieldParameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterUserParameters": {
+        "type": "object",
+        "properties": {
+          "edipi": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleInitial": {
+            "type": "string",
+            "nullable": true
+          },
+          "additionalField": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegisterUserAdditionalFieldParameters"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistrationFormFieldConfig": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegistrationFormFieldOptionConfig"
+            },
+            "nullable": true
+          },
+          "minLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "maxLength": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "multiple": {
+            "type": "boolean"
+          },
+          "useSelect": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistrationFormFieldOptionConfig": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme.",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

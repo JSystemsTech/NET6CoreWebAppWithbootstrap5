@@ -1,0 +1,16 @@
+﻿
+@each $name, $path in $image-map {
+    @each $prefix, $scale in $image-scale {
+        .image-#{$name}-#{$prefix} {
+            background-image: url($image-root-path+$path);
+            background-color: rgba(0,0,0,0);
+            height: $scale;
+            min-width: $scale;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: relative;
+            display: flex;
+        }
+    }
+}

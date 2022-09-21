@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootstrap-markdown-editor@2.0.2",
+      "destination": "wwwroot/lib/bootstrap-markdown-editor/"
+    },
+    {
+      "library": "highlight.js@11.6.0",
+      "destination": "wwwroot/lib/highlight.js/"
+    },
+    {
+      "library": "bootstrap@5.2.0",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "datatables.net@2.1.1",
+      "destination": "wwwroot/lib/datatables.net/"
+    },
+    {
+      "library": "datatables.net-bs5@1.12.1",
+      "destination": "wwwroot/lib/datatables.net-bs5/"
+    },
+    {
+      "library": "datatables.net-select@1.4.0",
+      "destination": "wwwroot/lib/datatables.net-select/"
+    },
+    {
+      "library": "datatables.net-buttons@2.2.3",
+      "destination": "wwwroot/lib/datatables.net-buttons/"
+    },
+    {
+      "library": "datatables.net-buttons-bs5@2.2.3",
+      "destination": "wwwroot/lib/datatables.net-buttons-bs5/"
+    },
+    {
+      "library": "jszip@3.10.1",
+      "destination": "wwwroot/lib/jszip/"
+    },
+    {
+      "library": "pdfmake@0.2.5",
+      "destination": "wwwroot/lib/pdfmake/"
+    },
+    {
+      "library": "Chart.js@3.9.1",
+      "destination": "wwwroot/lib/Chart.js/"
+    },
+    {
+      "library": "moment.js@2.29.4",
+      "destination": "wwwroot/lib/moment.js/"
+    },
+    {
+      "library": "lodash.js@4.17.21",
+      "destination": "wwwroot/lib/lodash.js/"
+    },
+    {
+      "library": "bootstrap@5.2.1",
+      "destination": "wwwroot/lib/bootstrap/"
+    }
+  ]
+}

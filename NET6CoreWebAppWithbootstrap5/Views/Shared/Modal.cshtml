@@ -1,0 +1,44 @@
+﻿@model Modal
+@using NET6CoreWebAppWithbootstrap5.Models
+
+@{
+    string IdBase = Html.UniqueId();
+    string backdrop = Model.Backdrop && Model.Static ? "static" : Model.Backdrop ? "true" : "false";
+    string keyboard = Model.Keyboard ? "true" : "false";
+    string focus = Model.Focus ? "true" : "false";
+    string size = ModalSize.Map(Model.Size);
+    string fullscreen = ModalFullscreen.Map(Model.Fullscreen);
+}
+@if (!string.IsNullOrWhiteSpace(Model.Description))
+{
+    <div id="@(IdBase)Description" class="sr-only">@Model.Description</div>
+}
+<div class="modal@(Model.Animation ? $" {Model.AnimationClass}":"")" id="@IdBase" aria-hidden="true" aria-labelledby="@(IdBase)Label" @(new HtmlString(!string.IsNullOrWhiteSpace(Model.Description) ? $" aria-describedBy=\"{IdBase}Description\"" : "")) tabindex="-1" data-bs-backdrop="@backdrop" data-bs-keyboard="@keyboard" data-bs-focus="@focus">
+    <div class="modal-dialog@(Model.Centered ? " modal-dialog-centered":"")@(Model.Scrollable ? " modal-dialog-scrollable":"")@(string.IsNullOrWhiteSpace(size)? "": $" {size}")@(string.IsNullOrWhiteSpace(fullscreen)? "": $" {fullscreen}")">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="@(IdBase)Label">@Model.Title</h5>
+                @if (Model.Close)
+                {
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                }
+            </div>
+            <div class="modal-body">
+                @if (!string.IsNullOrWhiteSpace(Model.Loading))
+                {
+                    <div class="w-100 text-center">
+                        <div class="spinner-border text-primary" style="width: 6rem; height: 6rem;" role="status">
+                            <span class="visually-hidden">@Model.Loading</span>
+                        </div>
+                    </div>
+                }
+            </div>
+            @if (Model.Footer)
+            {
+                <div class="modal-footer">
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
