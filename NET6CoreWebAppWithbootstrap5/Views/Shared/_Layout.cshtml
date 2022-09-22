@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="~/lib/highlight.js/styles/github.min.css" asp-append-version="true" />
     }
 </head>
-<body data-bs-modal-url="@Url.Action("Modal")">
+<body data-bs-modal-url="@Url.Action("Modal")" data-bs-offcanvas-url="@Url.Action("Offcanvas")">
     <div aria-live="polite" aria-atomic="true" class="position-relative container-fluid px-0">
         <div class="toast-container position-absolute top-0 end-0 p-3" style="z-index:3000;" data-bs="notification" data-bs-notification-autohide="@NotificationOptions.Value.Autohide.ToString().ToLower()" data-bs-notification-delay="@NotificationOptions.Value.Delay"></div>
     </div>
@@ -190,6 +190,9 @@
     <script src="~/js/custom/chartjs.unobtrusive.js" asp-append-version="true"></script>
     <script src="~/js/custom/jquery.counter.js" asp-append-version="true"></script>
     <script src="~/js/custom/jquery.serverside.modal.js" asp-append-version="true"></script>
+    <script src="~/js/custom/jquery.serverside.offcanvas.js" asp-append-version="true"></script>
+
+    
 
     <script>
         $.highlightCodeBlocks = function(){

@@ -305,6 +305,18 @@ $toast-background-color-base: $white !default;
     // scss-docs-end toast-variables
     $md-bg: tint-color($body-bg, 10%);
     $code-bg: tint-color($body-bg, 10%);
+
+
+    // Offcanvas
+
+    // scss-docs-start offcanvas-variables
+    $offcanvas-border-color: $modal-content-border-color;
+    $offcanvas-bg-color: $modal-content-bg;
+    $offcanvas-color: $modal-content-color;
+    $offcanvas-box-shadow: $modal-content-box-shadow-xs;
+    $offcanvas-backdrop-bg: $modal-backdrop-bg;
+    $offcanvas-backdrop-opacity: $modal-backdrop-opacity;
+    // scss-docs-end offcanvas-variables
 }
 $toast-background-color: rgba($toast-background-color-base, $toast-background-color-opacity);
 

@@ -19,10 +19,10 @@ namespace AuthenticationTokenService.Controllers
 #else
         [HttpPost("CreateToken")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Creates Authentication Token", typeof(AuthenticationTokenServiceAPIResponse<AuthTokenResponse>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Creates Authentication Token", typeof(APIResponse<AuthTokenResponse>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<AuthenticationTokenServiceAPIResponse<AuthTokenResponse>> CreateToken(TokenClaim[] claims)
+        public IActionResult CreateToken(TokenClaim[] claims)
         {
             try
             {
@@ -39,10 +39,10 @@ namespace AuthenticationTokenService.Controllers
 #else
         [HttpPost("ParseToken")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Parses and validates Authentication Token", typeof(AuthenticationTokenServiceAPIResponse<AuthTokenResponse>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Parses and validates Authentication Token", typeof(APIResponse<AuthTokenResponse>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<AuthenticationTokenServiceAPIResponse<AuthTokenResponse>> ParseToken(string tokenStr)
+        public IActionResult ParseToken(string tokenStr)
         {
             try
             {

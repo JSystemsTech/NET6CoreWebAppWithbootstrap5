@@ -5,10 +5,10 @@
     "version": "v1"
   },
   "paths": {
-    "/api/Login/Authenticate": {
+    "/api/Authentication/Authenticate": {
       "post": {
         "tags": [
-          "Login"
+          "Authentication"
         ],
         "operationId": "Authenticate",
         "parameters": [
@@ -26,7 +26,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApplicationUserRegistrationAPIAccessTokenApplicationUserRegistrationAPIResponse"
+                  "$ref": "#/components/schemas/APIAccessTokenAPIResponse"
                 }
               }
             }
@@ -55,7 +55,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApplicationUserRegistrationAPIResponse"
+                  "$ref": "#/components/schemas/BooleanAPIResponse"
                 }
               }
             }
@@ -84,7 +84,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanApplicationUserRegistrationAPIResponse"
+                  "$ref": "#/components/schemas/BooleanAPIResponse"
                 }
               }
             }
@@ -161,7 +161,7 @@
         },
         "additionalProperties": false
       },
-      "BooleanApplicationUserRegistrationAPIResponse": {
+      "BooleanAPIResponse": {
         "type": "object",
         "properties": {
           "value": {
@@ -180,7 +180,7 @@
         },
         "additionalProperties": false
       },
-      "ApplicationUserRegistrationAPIAccessToken": {
+      "APIAccessToken": {
         "type": "object",
         "properties": {
           "expiresUtc": {
@@ -198,11 +198,11 @@
         },
         "additionalProperties": false
       },
-      "ApplicationUserRegistrationAPIAccessTokenApplicationUserRegistrationAPIResponse": {
+      "APIAccessTokenAPIResponse": {
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/ApplicationUserRegistrationAPIAccessToken"
+            "$ref": "#/components/schemas/APIAccessToken"
           },
           "hasError": {
             "type": "boolean",

@@ -1,13 +1,11 @@
 ﻿using AuthenticationTokenService;
-using AuthenticationTokenService.Models;
-using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 
 namespace CoreApplicationServicesAPI
 {
     public partial class CoreApplicationServicesAPIClient
     {
-        private CoreApplicationServicesAPIAccessToken? _AccessToken { get; set; } 
+        private APIAccessToken? _AccessToken { get; set; } 
         private bool _FetchingAccessToken { get; set; }
         
         partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
@@ -24,7 +22,7 @@ namespace CoreApplicationServicesAPI
                     }
                     _FetchingAccessToken = false;
                 }
-                if (_AccessToken is CoreApplicationServicesAPIAccessToken ac)
+                if (_AccessToken is APIAccessToken ac)
                 {
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ac.Token);
                 }

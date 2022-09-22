@@ -1,0 +1,6 @@
+﻿body {
+    @each $state, $value in $theme-colors {
+        $color-rgb: to-rgb($value);
+        --bs-chart-color-#{$state}: #{RGBA($color-rgb, 1)};
+    }
+}

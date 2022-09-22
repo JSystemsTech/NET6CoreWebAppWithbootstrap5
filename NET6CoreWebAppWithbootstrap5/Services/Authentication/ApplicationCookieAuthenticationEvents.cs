@@ -93,7 +93,7 @@ namespace NET6CoreWebAppWithbootstrap5.Services.Authentication
             if (httpContext.User.Identity is IIdentity identity &&
                 identity.IsAuthenticated &&
                 httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData) is Claim tokenClaim &&
-                AuthTokenServiceClient.ParseTokenAsync(tokenClaim.Value).GetAwaiter().GetResult() is AuthTokenResponseAuthenticationTokenServiceAPIResponse response
+                AuthTokenServiceClient.ParseTokenAsync(tokenClaim.Value).GetAwaiter().GetResult() is AuthTokenResponseAPIResponse response
                 && !response.HasError
             )
             {
@@ -111,7 +111,7 @@ namespace NET6CoreWebAppWithbootstrap5.Services.Authentication
         public async Task<bool> IsValidPrincipalAsync(ClaimsPrincipal user)
         {
             if (user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.UserData) is Claim tokenClaim &&
-                (await AuthTokenServiceClient.ParseTokenAsync(tokenClaim.Value)) is AuthTokenResponseAuthenticationTokenServiceAPIResponse response
+                (await AuthTokenServiceClient.ParseTokenAsync(tokenClaim.Value)) is AuthTokenResponseAPIResponse response
                 && !response.HasError
                 && response.Value.IsValid
             )
@@ -140,7 +140,7 @@ namespace NET6CoreWebAppWithbootstrap5.Services.Authentication
         public async Task<(ClaimsPrincipal? user, AuthTokenResponse? authToken)> CreateAuthenticatedUserAsync(string authTokenStr)
         {
             // Clone current identity
-            if ((await AuthTokenServiceClient.ParseTokenAsync(authTokenStr)) is AuthTokenResponseAuthenticationTokenServiceAPIResponse response && !response.HasError)
+            if ((await AuthTokenServiceClient.ParseTokenAsync(authTokenStr)) is AuthTokenResponseAPIResponse response && !response.HasError)
             {
                 return await CreateAuthenticatedUserAsync(response.Value);
             }
@@ -252,7 +252,7 @@ namespace NET6CoreWebAppWithbootstrap5.Services.Authentication
                 }
 
                 string header = Request.Headers[webAppInfo.SsO_Header].ToString();
-                if((await AuthTokenServiceClient.ParseSSOTokenAsync(header)) is SSOTokenDataResponseAuthenticationTokenServiceAPIResponse ssoResponse && !ssoResponse.HasError)
+                if((await AuthTokenServiceClient.ParseSSOTokenAsync(header)) is SSOTokenDataResponseAPIResponse ssoResponse && !ssoResponse.HasError)
                 {
                     var data = ssoResponse.Value;
                     var authToken = await ApplicationPricipalIdentityManager.CreateTokenAsync(data.Edipi, $"{data.FirstName} {data.LastName}", data.FirstName, data.LastName, data.MiddleInitial, data.Email);

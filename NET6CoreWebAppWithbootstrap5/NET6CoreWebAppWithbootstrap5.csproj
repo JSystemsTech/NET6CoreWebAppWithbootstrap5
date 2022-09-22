@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\js\custom\" />
     <Folder Include="wwwroot\lib\krajee-markdown-editor\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
@@ -45,6 +44,10 @@
     </OpenApiReference>
     <OpenApiReference Include="OpenAPIs\CoreApplicationServicesAPI.json" CodeGenerator="NSwagCSharp" Namespace="CoreApplicationServicesAPI" ClassName="CoreApplicationServicesAPIClient">
       <SourceUri>http://localhost:8080/CoreApplicationServicesAPI/api/docs/v1/CoreApplicationServicesAPI.json</SourceUri>
+      <Options>/AdditionalNamespaceUsages:OpenAPI.ApiException /GenerateExceptionClasses:false</Options>
+    </OpenApiReference>
+    <OpenApiReference Include="OpenAPIs\WebAppAPI.json" CodeGenerator="NSwagCSharp" Namespace="WebAppAPI" ClassName="WebAppAPIClient">
+      <SourceUri>http://localhost:8080/WebAppAPI/api/docs/v1/WebAppAPI.json</SourceUri>
       <Options>/AdditionalNamespaceUsages:OpenAPI.ApiException /GenerateExceptionClasses:false</Options>
     </OpenApiReference>
   </ItemGroup>

@@ -53,6 +53,8 @@ namespace NET6CoreWebAppWithbootstrap5.Models
         public bool Scrollable { get; set; }
         public bool Animation { get; set; }
         public string AnimationClass { get; set; }
+
+        public string ModalClass { get; set; }
         public string Loading { get; set; }
         public bool Close { get; set; }
 
@@ -66,6 +68,7 @@ namespace NET6CoreWebAppWithbootstrap5.Models
             Footer = true;
             Animation = true;
             AnimationClass = "fade";
+            ModalClass = "";
             Loading = "Loading Content. Please Wait";
             Close = true;
             Scrollable = true;

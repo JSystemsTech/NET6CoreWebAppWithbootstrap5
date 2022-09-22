@@ -24,10 +24,10 @@ namespace CoreApplicationServicesAPI.Controllers
 #else
         [HttpGet("GetApplicationInfo")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Gets Application Info Record", typeof(CoreApplicationServicesAPIResponse<ApplicationInfo>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Gets Application Info Record", typeof(APIResponse<ApplicationInfo>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<CoreApplicationServicesAPIResponse<ApplicationInfo>> GetApplicationInfo(string? appId = null)
+        public IActionResult GetApplicationInfo(string? appId = null)
         {
             try
             {
@@ -58,10 +58,10 @@ namespace CoreApplicationServicesAPI.Controllers
 #else
             [HttpPost("UpdateApplicationInfo")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Updates Application Info Record", typeof(CoreApplicationServicesAPIResponse<ApplicationInfo>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Updates Application Info Record", typeof(APIResponse<ApplicationInfo>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<CoreApplicationServicesAPIResponse<ApplicationInfo>> UpdateApplicationInfo(ApplicationInfoParameters applicationInfo)
+        public IActionResult UpdateApplicationInfo(ApplicationInfoParameters applicationInfo)
         {
             try
             {
@@ -100,10 +100,10 @@ namespace CoreApplicationServicesAPI.Controllers
 #else
         [HttpGet("GetWebApplicationInfo")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Gets Web Application Info Record", typeof(CoreApplicationServicesAPIResponse<IEnumerable<ApplicationInfo>>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Gets Web Application Info Record", typeof(APIResponse<IEnumerable<ApplicationInfo>>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<CoreApplicationServicesAPIResponse<IEnumerable<ApplicationInfo>>> GetWebApplicationInfo(string? appCode = null)
+        public IActionResult GetWebApplicationInfo(string? appCode = null)
         {
             IEnumerable<ApplicationInfo> defaultValue = Array.Empty<ApplicationInfo>();
             try
@@ -128,10 +128,10 @@ namespace CoreApplicationServicesAPI.Controllers
 #else
         [HttpGet("ApplicationExists")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Checks to see if Application Info Record exists", typeof(CoreApplicationServicesAPIResponse<bool>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Checks to see if Application Info Record exists", typeof(APIResponse<bool>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<CoreApplicationServicesAPIResponse<bool>> ApplicationExists(string appId)
+        public IActionResult ApplicationExists(string appId)
         {
             try
             {

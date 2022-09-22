@@ -229,6 +229,12 @@ namespace NET6CoreWebAppWithbootstrap5.Controllers
         {
             return PartialView("Modal", vm);
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public PartialViewResult Offcanvas(Offcanvas vm)
+        {
+            return PartialView("Offcanvas", vm);
+        }
         [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
@@ -324,6 +330,10 @@ namespace NET6CoreWebAppWithbootstrap5.Controllers
         public IActionResult DataTableExample()
         {
             return View();
+        }
+        public IActionResult SampleModal()
+        {
+            return PartialView();
         }
         public async Task<IActionResult> ApplicationSettings()
         {

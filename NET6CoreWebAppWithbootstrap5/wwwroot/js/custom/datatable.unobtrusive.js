@@ -350,11 +350,14 @@
             options.initComplete = function (settings, json) {
                 var api = this.api();
                 if (tableData.appendForm === true) {
-                    var searchInputGroup = table.closest('.dataTables_wrapper').find('.dataTables_filter .input-group');
-                    var formDropdownEl = $('<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Filter</button>');
-                    var formDropdownMenuEl = $('<di class="dropdown-menu dropdown-menu-end"></div>');
-                    formDropdownMenuEl.append($(tableData.dtForm));
-                    searchInputGroup.append(formDropdownEl).append(formDropdownMenuEl);
+                    //var searchInputGroup = table.closest('.dataTables_wrapper').find('.dataTables_filter .input-group');
+                    //var formDropdownEl = $('<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Filter</button>');
+                    //var formDropdownMenuEl = $('<di class="dropdown-menu dropdown-menu-end"></div>');
+                    //formDropdownMenuEl.append($(tableData.dtForm));
+                    //searchInputGroup.append(formDropdownEl).append(formDropdownMenuEl);
+
+                    var formWrapper = table.closest('.dataTables_wrapper').find('.dataTables_form_wrapper');
+                    formWrapper.append($(tableData.dtForm));
                     $(tableData.dtForm).bsShow();
                 }
 

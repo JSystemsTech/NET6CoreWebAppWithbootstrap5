@@ -6,21 +6,21 @@ namespace ApplicationUserRegistrationAPI
 {
     public partial class ApplicationUserRegistrationAPIClient
     {
-        private ApplicationUserRegistrationAPIAccessToken? _AccessToken { get; set; }
-        private IDictionary<string, ApplicationUserRegistrationAPIAccessToken> APIAccessTokens { get; set; }
+        private APIAccessToken? _AccessToken { get; set; }
+        private IDictionary<string, APIAccessToken> APIAccessTokens { get; set; }
 
         [ActivatorUtilitiesConstructor] // This constructor will be used by DI
         public ApplicationUserRegistrationAPIClient(HttpClient httpClient)
         : this("", httpClient) {
-            APIAccessTokens = new Dictionary<string, ApplicationUserRegistrationAPIAccessToken>();
+            APIAccessTokens = new Dictionary<string, APIAccessToken>();
         }
         partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
         {
             SetAccessToken(request);
         }
-        private ApplicationUserRegistrationAPIAccessToken? GetAccessToken(string appId)
+        private APIAccessToken? GetAccessToken(string appId)
         {
-            if (APIAccessTokens.TryGetValue(appId, out ApplicationUserRegistrationAPIAccessToken? accessToken) && accessToken != null)
+            if (APIAccessTokens.TryGetValue(appId, out APIAccessToken? accessToken) && accessToken != null)
             {
                 return accessToken;
             }
@@ -49,34 +49,34 @@ namespace ApplicationUserRegistrationAPI
             _AccessToken = accessToken;
             return true;
         }
-        private async Task<ApplicationUserRegistrationAPIAccessTokenApplicationUserRegistrationAPIResponse> AuthenticateAsync(ApplicationAPIConfig config)
+        private async Task<APIAccessTokenAPIResponse> AuthenticateAsync(ApplicationAPIConfig config)
         {
             _baseUrl = config.BaseUrl;
             var response = await AuthenticateAsync(ApplicationConfiguration.ApplicationSettings.AppId);
 
             return response;
         }
-        public async Task<BooleanApplicationUserRegistrationAPIResponse> RegisterUserAsync(string appId, RegisterUserParameters parameters, ApplicationAPIConfig config)
+        public async Task<BooleanAPIResponse> RegisterUserAsync(string appId, RegisterUserParameters parameters, ApplicationAPIConfig config)
         {
             if(await TryConfigureAccessTokenForAppAsync(appId, config))
             {
                 _baseUrl = config.BaseUrl;
                 return  await RegisterUserAsync(parameters);
             }
-            return new BooleanApplicationUserRegistrationAPIResponse() { ErrorMessage= "Unable to configure access token for application API"};
+            return new BooleanAPIResponse() { ErrorMessage= "Unable to configure access token for application API"};
         }
-        public async Task<BooleanApplicationUserRegistrationAPIResponse> UserIsRegisteredAsync(string appId, RegisterUserParameters parameters, ApplicationAPIConfig config)
+        public async Task<BooleanAPIResponse> UserIsRegisteredAsync(string appId, RegisterUserParameters parameters, ApplicationAPIConfig config)
         {
             if (await TryConfigureAccessTokenForAppAsync(appId, config))
             {
                 _baseUrl = config.BaseUrl;
                 return await UserIsRegisteredAsync(parameters);
             }
-            return new BooleanApplicationUserRegistrationAPIResponse() { ErrorMessage = "Unable to configure access token for application API" };
+            return new BooleanAPIResponse() { ErrorMessage = "Unable to configure access token for application API" };
         }
         private void SetAccessToken(HttpRequestMessage request)
         {
-            if (_AccessToken is ApplicationUserRegistrationAPIAccessToken ac)
+            if (_AccessToken is APIAccessToken ac)
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ac.Token);
             }

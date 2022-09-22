@@ -11,6 +11,7 @@ namespace CoreApplicationServicesAPI.Controllers
     [Authorize]
     public class ConnectionStringController : ApiControllerBase
     {
+        private ConnectionStringManager _ConnectionStringManager => Services.GetRequiredService<ConnectionStringManager>();
         public ConnectionStringController(IServiceProvider services)
             : base(services) { }
 
@@ -19,10 +20,10 @@ namespace CoreApplicationServicesAPI.Controllers
 #else
                 [HttpGet("GetConnectionString")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Gets the Connection String value based on appId", typeof(CoreApplicationServicesAPIResponse<ConnectionStringInfo>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Gets the Connection String value based on appId", typeof(APIResponse<ConnectionStringInfo>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<CoreApplicationServicesAPIResponse<ConnectionStringInfo>> GetConnectionString(string databaseName)
+        public IActionResult GetConnectionString(string databaseName)
         {
             try
             {

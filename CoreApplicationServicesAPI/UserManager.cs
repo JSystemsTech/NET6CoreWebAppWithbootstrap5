@@ -10,7 +10,7 @@ namespace CoreApplicationServicesAPI
     //manages connected Users
     public class UserManager
     {
-        public CoreApplicationServicesAPIAccessToken GetAccessToken(string appId)
+        public APIAccessToken GetAccessToken(string appId)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ApplicationConfiguration.JwtSettings.EncryptionKey));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -24,7 +24,7 @@ namespace CoreApplicationServicesAPI
             DateTime expiresUtc = DateTime.UtcNow.AddMinutes(ApplicationConfiguration.JwtSettings.ValidForCalculated);
             DateTime refreshOnUtc = DateTime.UtcNow.AddMinutes(ApplicationConfiguration.JwtSettings.RefreshAfter);
             string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            return new CoreApplicationServicesAPIAccessToken(expiresUtc, refreshOnUtc, token);
+            return new APIAccessToken(expiresUtc, refreshOnUtc, token);
         }
     }
 }

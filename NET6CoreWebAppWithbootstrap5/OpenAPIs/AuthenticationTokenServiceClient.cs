@@ -6,10 +6,9 @@ namespace AuthenticationTokenService
 {
     public partial class AuthenticationTokenServiceClient
     {
-        private AuthenticationTokenServiceAccessToken? _AccessToken { get; set; } 
+        private APIAccessToken? _AccessToken { get; set; } 
         private bool _FetchingAccessToken { get; set; }
 
-        [ActivatorUtilitiesConstructor] // This constructor will be used by DI
         partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url)
         {
             if (!_FetchingAccessToken) //prevent infinite loop while calling AuthenticateAsync
@@ -24,7 +23,7 @@ namespace AuthenticationTokenService
                     }
                     _FetchingAccessToken = false;
                 }
-                if (_AccessToken is AuthenticationTokenServiceAccessToken ac)
+                if (_AccessToken is APIAccessToken ac)
                 {
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", ac.Token);
                 }

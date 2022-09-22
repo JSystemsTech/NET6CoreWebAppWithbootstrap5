@@ -31,7 +31,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApplicationInfoCoreApplicationServicesAPIResponse"
+                  "$ref": "#/components/schemas/ApplicationInfoAPIResponse"
                 }
               }
             }
@@ -60,7 +60,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApplicationInfoCoreApplicationServicesAPIResponse"
+                  "$ref": "#/components/schemas/ApplicationInfoAPIResponse"
                 }
               }
             }
@@ -89,7 +89,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApplicationInfoCoreApplicationServicesAPIResponse"
+                  "$ref": "#/components/schemas/ApplicationInfoAPIResponse"
                 }
               }
             }
@@ -118,7 +118,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApplicationInfoIEnumerableCoreApplicationServicesAPIResponse"
+                  "$ref": "#/components/schemas/ApplicationInfoIEnumerableAPIResponse"
                 }
               }
             }
@@ -147,7 +147,36 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanCoreApplicationServicesAPIResponse"
+                  "$ref": "#/components/schemas/BooleanAPIResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Authentication/Authenticate": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "Authenticate",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIAccessTokenAPIResponse"
                 }
               }
             }
@@ -176,36 +205,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConnectionStringInfoCoreApplicationServicesAPIResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Login/Authenticate": {
-      "post": {
-        "tags": [
-          "Login"
-        ],
-        "operationId": "Authenticate",
-        "parameters": [
-          {
-            "name": "appId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CoreApplicationServicesAPIAccessTokenCoreApplicationServicesAPIResponse"
+                  "$ref": "#/components/schemas/ConnectionStringInfoAPIResponse"
                 }
               }
             }
@@ -243,7 +243,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanCoreApplicationServicesAPIResponse"
+                  "$ref": "#/components/schemas/BooleanAPIResponse"
                 }
               }
             }
@@ -281,7 +281,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BooleanCoreApplicationServicesAPIResponse"
+                  "$ref": "#/components/schemas/BooleanAPIResponse"
                 }
               }
             }
@@ -292,6 +292,42 @@
   },
   "components": {
     "schemas": {
+      "APIAccessToken": {
+        "type": "object",
+        "properties": {
+          "expiresUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refreshOnUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "APIAccessTokenAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/APIAccessToken"
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ApplicationAPIConfig": {
         "type": "object",
         "properties": {
@@ -391,7 +427,7 @@
         },
         "additionalProperties": false
       },
-      "ApplicationInfoCoreApplicationServicesAPIResponse": {
+      "ApplicationInfoAPIResponse": {
         "type": "object",
         "properties": {
           "value": {
@@ -409,7 +445,7 @@
         },
         "additionalProperties": false
       },
-      "ApplicationInfoIEnumerableCoreApplicationServicesAPIResponse": {
+      "ApplicationInfoIEnumerableAPIResponse": {
         "type": "object",
         "properties": {
           "value": {
@@ -498,7 +534,7 @@
         },
         "additionalProperties": false
       },
-      "BooleanCoreApplicationServicesAPIResponse": {
+      "BooleanAPIResponse": {
         "type": "object",
         "properties": {
           "value": {
@@ -531,47 +567,11 @@
         },
         "additionalProperties": false
       },
-      "ConnectionStringInfoCoreApplicationServicesAPIResponse": {
+      "ConnectionStringInfoAPIResponse": {
         "type": "object",
         "properties": {
           "value": {
             "$ref": "#/components/schemas/ConnectionStringInfo"
-          },
-          "hasError": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "errorMessage": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CoreApplicationServicesAPIAccessToken": {
-        "type": "object",
-        "properties": {
-          "expiresUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "refreshOnUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "token": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CoreApplicationServicesAPIAccessTokenCoreApplicationServicesAPIResponse": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/CoreApplicationServicesAPIAccessToken"
           },
           "hasError": {
             "type": "boolean",

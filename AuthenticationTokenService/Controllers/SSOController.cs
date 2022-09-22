@@ -20,10 +20,10 @@ namespace AuthenticationTokenService.Controllers
 #else
         [HttpPost("CreateSSOToken")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Creates Authentication Token", typeof(AuthenticationTokenServiceAPIResponse<AuthTokenResponse>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Creates Authentication Token", typeof(APIResponse<AuthTokenResponse>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<AuthenticationTokenServiceAPIResponse<AuthTokenResponse>> CreateSSOToken(SSOTokenParameters parameters)
+        public IActionResult CreateSSOToken(SSOTokenParameters parameters)
         {
             try
             {
@@ -55,10 +55,10 @@ namespace AuthenticationTokenService.Controllers
 #else
         [HttpPost("ParseSSOToken")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Parses and validates SSO Token", typeof(AuthenticationTokenServiceAPIResponse<SSOTokenDataResponse>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Parses and validates SSO Token", typeof(APIResponse<SSOTokenDataResponse>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<AuthenticationTokenServiceAPIResponse<SSOTokenDataResponse>> ParseSSOToken(string ssoToken)
+        public IActionResult ParseSSOToken(string ssoToken)
         {
             try
             {

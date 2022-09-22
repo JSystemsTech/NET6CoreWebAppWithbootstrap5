@@ -10,20 +10,20 @@ namespace AuthenticationTokenService.Controllers
     [Route("[controller]")]
     [ApiController]
 
-    public class LoginController : ApiControllerBase
+    public class AuthenticationController : ApiControllerBase
     {
-        public LoginController(IServiceProvider services) : base(services) { }
+        public AuthenticationController(IServiceProvider services) : base(services) { }
         private UserManager _UserManager => Services.GetRequiredService<UserManager>();
         
         #if OperationId
-                [HttpPost("Authenticate", Name = nameof(Authenticate))]
+                [HttpPost("Authenticate", Name = nameof(AuthenticateAsync))]
         #else
                 [HttpPost("Authenticate")]
         #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Creates API Authentication JWT Token", typeof(AuthenticationTokenServiceAPIResponse<AuthenticationTokenServiceAccessToken>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Creates API Authentication JWT Token", typeof(APIResponse<APIAccessToken>))]
         [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
-        public async Task<ActionResult<AuthenticationTokenServiceAPIResponse<AuthenticationTokenServiceAccessToken>>> Authenticate(string appId)
+        public async Task<IActionResult> AuthenticateAsync(string appId)
         {
             try
             {
@@ -31,11 +31,11 @@ namespace AuthenticationTokenService.Controllers
                 {
                     return SuccessResponse(_UserManager.GetAccessToken(appId));
                 }
-                return ErrorResponse($"Unauthorized App \"{appId}\"", AuthenticationTokenServiceAccessToken.Default);
+                return ErrorResponse($"Unauthorized App \"{appId}\"", APIAccessToken.Default);
             }
             catch(Exception ex)
             {
-                return ErrorResponse(ex, AuthenticationTokenServiceAccessToken.Default);
+                return ErrorResponse(ex, APIAccessToken.Default);
             }
         }
     }

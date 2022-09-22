@@ -21,10 +21,10 @@ namespace CoreApplicationServicesAPI.Controllers
 #else
         [HttpPost("UpdateApplicationAPIConfig")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Check to see if user is registered for Application", typeof(CoreApplicationServicesAPIResponse<ApplicationInfo>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Check to see if user is registered for Application", typeof(APIResponse<ApplicationInfo>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<CoreApplicationServicesAPIResponse<ApplicationInfo>> UpdateApplicationAPIConfig(ApplicationAPIConfig config)
+        public IActionResult UpdateApplicationAPIConfig(ApplicationAPIConfig config)
         {
             try
             {

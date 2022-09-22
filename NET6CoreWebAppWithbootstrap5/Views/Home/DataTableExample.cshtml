@@ -3,6 +3,7 @@
 }
 <form id="@FormId" class="p-2 d-none">
     @Html.AntiForgeryToken()    
+
 </form>
 <div class="row">
     <div class="col">
@@ -14,3 +15,34 @@
         })
     </div>
 </div>
+@Html.Button("Serverside Modal", new { id=$"{FormId}ModalButton", @class="btn-primary"})
+@Html.Button("Serverside Offcanvas", new { id=$"{FormId}OffcanvasButton", @class="btn-secondary"})
+
+@section Scripts{
+    <script type="text/javascript">
+        $('#@($"{FormId}ModalButton")').serversideModalButton({
+            size: 'lg',
+            url: '@(Url.Action("SampleModal"))',
+            title: 'Test Server Modal',
+            loading: 'Loading Test Server Modal',
+            static: true,
+            close: true,
+            reload: true,
+            onLoad: function (modal, el) {
+            }
+        });
+        $('#@($"{FormId}OffcanvasButton")').serversideOffcanvasButton({
+            placement: 'top',
+            url: '@(Url.Action("SampleModal"))',
+            title: 'Test Server Offcanvas',
+            loading: 'Loading Test Server Offcanvas',
+            static: true,
+            close: true,
+            reload: true,
+            onLoad: function (modal, el) {
+                
+            }
+        });
+    </script>
+}
+

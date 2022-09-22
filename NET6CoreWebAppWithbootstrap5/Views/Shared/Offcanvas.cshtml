@@ -16,7 +16,7 @@
 {
     <div id="@(IdBase)Description" class="sr-only">@Model.Description</div>
 }
-<div class="offcanvas @(size) @(placement) @(Model.Animation ? $" {Model.AnimationClass}":"")" id="@IdBase" aria-hidden="true" aria-labelledby="@(IdBase)Label" @(ariaDescribedBy) tabindex="-1" data-bs-backdrop="@backdrop" data-bs-keyboard="@keyboard" data-bs-focus="@focus" data-bs-scroll="@scroll">
+<div class="offcanvas  @(placement) @(Model.Animation ? $" {Model.AnimationClass}":"")" id="@IdBase" aria-hidden="true" aria-labelledby="@(IdBase)Label" @(ariaDescribedBy) tabindex="-1" data-bs-backdrop="@backdrop" data-bs-keyboard="@keyboard" data-bs-focus="@focus" data-bs-scroll="@scroll">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="@(IdBase)Label">@Model.Title</h5>
         @if (Model.Close)

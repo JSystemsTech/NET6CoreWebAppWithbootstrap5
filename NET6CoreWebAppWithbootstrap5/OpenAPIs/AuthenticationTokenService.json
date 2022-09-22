@@ -10,12 +10,12 @@
     }
   ],
   "paths": {
-    "/api/Login/Authenticate": {
+    "/api/Authentication/Authenticate": {
       "post": {
         "tags": [
-          "Login"
+          "Authentication"
         ],
-        "operationId": "Authenticate",
+        "operationId": "AuthenticateAsync",
         "parameters": [
           {
             "name": "appId",
@@ -31,7 +31,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthenticationTokenServiceAccessTokenAuthenticationTokenServiceAPIResponse"
+                  "$ref": "#/components/schemas/APIAccessTokenAPIResponse"
                 }
               }
             }
@@ -60,7 +60,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthTokenResponseAuthenticationTokenServiceAPIResponse"
+                  "$ref": "#/components/schemas/AuthTokenResponseAPIResponse"
                 }
               }
             }
@@ -89,7 +89,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SSOTokenDataResponseAuthenticationTokenServiceAPIResponse"
+                  "$ref": "#/components/schemas/SSOTokenDataResponseAPIResponse"
                 }
               }
             }
@@ -121,7 +121,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthTokenResponseAuthenticationTokenServiceAPIResponse"
+                  "$ref": "#/components/schemas/AuthTokenResponseAPIResponse"
                 }
               }
             }
@@ -150,7 +150,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AuthTokenResponseAuthenticationTokenServiceAPIResponse"
+                  "$ref": "#/components/schemas/AuthTokenResponseAPIResponse"
                 }
               }
             }
@@ -161,6 +161,42 @@
   },
   "components": {
     "schemas": {
+      "APIAccessToken": {
+        "type": "object",
+        "properties": {
+          "expiresUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refreshOnUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "APIAccessTokenAPIResponse": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/APIAccessToken"
+          },
+          "hasError": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AuthTokenResponse": {
         "type": "object",
         "properties": {
@@ -186,47 +222,11 @@
         },
         "additionalProperties": false
       },
-      "AuthTokenResponseAuthenticationTokenServiceAPIResponse": {
+      "AuthTokenResponseAPIResponse": {
         "type": "object",
         "properties": {
           "value": {
             "$ref": "#/components/schemas/AuthTokenResponse"
-          },
-          "hasError": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "errorMessage": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "AuthenticationTokenServiceAccessToken": {
-        "type": "object",
-        "properties": {
-          "expiresUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "refreshOnUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "token": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "AuthenticationTokenServiceAccessTokenAuthenticationTokenServiceAPIResponse": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "$ref": "#/components/schemas/AuthenticationTokenServiceAccessToken"
           },
           "hasError": {
             "type": "boolean",
@@ -266,7 +266,7 @@
         },
         "additionalProperties": false
       },
-      "SSOTokenDataResponseAuthenticationTokenServiceAPIResponse": {
+      "SSOTokenDataResponseAPIResponse": {
         "type": "object",
         "properties": {
           "value": {

@@ -13,7 +13,7 @@
 {
     <div id="@(IdBase)Description" class="sr-only">@Model.Description</div>
 }
-<div class="modal@(Model.Animation ? $" {Model.AnimationClass}":"")" id="@IdBase" aria-hidden="true" aria-labelledby="@(IdBase)Label" @(new HtmlString(!string.IsNullOrWhiteSpace(Model.Description) ? $" aria-describedBy=\"{IdBase}Description\"" : "")) tabindex="-1" data-bs-backdrop="@backdrop" data-bs-keyboard="@keyboard" data-bs-focus="@focus">
+<div class="modal@(Model.Animation ? $" {Model.AnimationClass}":"") @Model.ModalClass" id="@IdBase" aria-hidden="true" aria-labelledby="@(IdBase)Label" @(new HtmlString(!string.IsNullOrWhiteSpace(Model.Description) ? $" aria-describedBy=\"{IdBase}Description\"" : "")) tabindex="-1" data-bs-backdrop="@backdrop" data-bs-keyboard="@keyboard" data-bs-focus="@focus">
     <div class="modal-dialog@(Model.Centered ? " modal-dialog-centered":"")@(Model.Scrollable ? " modal-dialog-scrollable":"")@(string.IsNullOrWhiteSpace(size)? "": $" {size}")@(string.IsNullOrWhiteSpace(fullscreen)? "": $" {fullscreen}")">
         <div class="modal-content">
             <div class="modal-header">

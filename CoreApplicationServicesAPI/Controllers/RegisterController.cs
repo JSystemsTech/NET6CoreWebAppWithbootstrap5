@@ -1,4 +1,5 @@
-﻿using CoreApplicationServicesAPI.DomainLayer;
+﻿using ApplicationUserRegistrationAPI;
+using CoreApplicationServicesAPI.DomainLayer;
 using CoreApplicationServicesAPI.DomainLayer.Models.Data;
 using CoreApplicationServicesAPI.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +15,7 @@ namespace CoreApplicationServicesAPI.Controllers
     [Authorize]
     public class RegisterController : ApiControllerBase
     {
+        private ApplicationUserRegistrationAPIClient _ApplicationUserRegistrationAPIClient => Services.GetRequiredService<ApplicationUserRegistrationAPIClient>();
         public RegisterController(IServiceProvider services)
             : base(services) { }
 
@@ -22,10 +24,10 @@ namespace CoreApplicationServicesAPI.Controllers
 #else
         [HttpPost("UserIsRegistered")]
 #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Registers User for Application", typeof(CoreApplicationServicesAPIResponse<bool>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Registers User for Application", typeof(APIResponse<bool>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<CoreApplicationServicesAPIResponse<bool>> UserIsRegistered(string appId, ApplicationUserRegistrationAPI.RegisterUserParameters parameters)
+        public IActionResult UserIsRegistered(string appId, ApplicationUserRegistrationAPI.RegisterUserParameters parameters)
         {
             try
             {
@@ -60,10 +62,10 @@ namespace CoreApplicationServicesAPI.Controllers
         #else
         [HttpPost("RegisterUser")]
         #endif
-        [SwaggerResponse((int)HttpStatusCode.OK, "Updates Application API Configuration Record", typeof(CoreApplicationServicesAPIResponse<bool>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Updates Application API Configuration Record", typeof(APIResponse<bool>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<CoreApplicationServicesAPIResponse<bool>> RegisterUser(string appId, ApplicationUserRegistrationAPI.RegisterUserParameters parameters)
+        public IActionResult RegisterUser(string appId, ApplicationUserRegistrationAPI.RegisterUserParameters parameters)
         {
             try
             {

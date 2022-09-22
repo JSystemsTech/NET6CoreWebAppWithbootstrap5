@@ -17,7 +17,7 @@ namespace AuthenticationTokenService
         }
         public async Task<bool> IsAllowedUserAsync(string appId)
         => (await CoreApplicationServicesAPIClient.ApplicationExistsAsync(appId)).Value;
-        public AuthenticationTokenServiceAccessToken GetAccessToken(string appId)
+        public Models.APIAccessToken GetAccessToken(string appId)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ApplicationConfiguration.JwtSettings.EncryptionKey));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -31,7 +31,7 @@ namespace AuthenticationTokenService
             DateTime expiresUtc = DateTime.UtcNow.AddMinutes(ApplicationConfiguration.JwtSettings.ValidForCalculated);
             DateTime refreshOnUtc = DateTime.UtcNow.AddMinutes(ApplicationConfiguration.JwtSettings.RefreshAfter);
             string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            return new AuthenticationTokenServiceAccessToken(expiresUtc, refreshOnUtc, token);
+            return new Models.APIAccessToken(expiresUtc, refreshOnUtc, token);
         }
     }
 }

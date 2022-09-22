@@ -33,7 +33,9 @@
 				'animation',
 				'animationClass',
 				'loading',
-				'close']
+				'close',
+				'modalClass'
+			]
         }
 	};
 	var buildPostData = function (options) {
