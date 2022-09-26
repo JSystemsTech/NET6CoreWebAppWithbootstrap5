@@ -19,9 +19,8 @@
         public bool Multiple { get; set; }
         public bool UseSelect => Options != null && Options.Count()>0;
     }
-    public class ApplicationAPIConfig
+    public class RegisterUserFormConfig
     {
-        public string BaseUrl { get; set; } = "";
         public RegistrationFormFieldConfig[] Fields { get; set; } = new RegistrationFormFieldConfig[0];
     }
     public class RegisterUserAdditionalFieldParameters

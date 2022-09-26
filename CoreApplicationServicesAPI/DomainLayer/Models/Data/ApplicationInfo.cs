@@ -22,7 +22,8 @@ namespace CoreApplicationServicesAPI.DomainLayer.Models.Data
         public byte[]? LogoFileData { get; set; }
 
         public string SSO_Header { get; set; } = "";
-        public ApplicationAPIConfig? ApplicationAPIConfig { get; set; }
+        public string ApplicationAPIUrl { get; set; } = "";
+        public RegisterUserFormConfig? RegisterUserFormConfig { get; set; }
 
         internal static ApplicationInfo Default = new ApplicationInfo();
         protected override void Init()
@@ -41,11 +42,12 @@ namespace CoreApplicationServicesAPI.DomainLayer.Models.Data
             LogoFileContentType = GetColumn<string?>("LogoFileContentType");
             LogoFileData = GetColumn<byte[]?> ("LogoFileData");
             SSO_Header = GetColumn("SSO_Header", "");
+            ApplicationAPIUrl = GetColumn("ApplicationAPIUrl","");
 
-            string json  = GetColumn("ApplicationAPIConfig", "");
+            string json  = GetColumn("RegisterUserFormConfig", "");
             if (!string.IsNullOrWhiteSpace(json))
             {
-                ApplicationAPIConfig = JsonConvert.DeserializeObject<ApplicationAPIConfig>(json);
+                RegisterUserFormConfig = JsonConvert.DeserializeObject<RegisterUserFormConfig>(json);
             }
             
         }
@@ -67,10 +69,12 @@ namespace CoreApplicationServicesAPI.DomainLayer.Models.Data
             LogoFileData = await GetColumnAsync<byte[]?>("LogoFileData");
             SSO_Header = await GetColumnAsync("SSO_Header", "");
 
-            string json = await GetColumnAsync("ApplicationAPIConfig", "");
+            ApplicationAPIUrl = await GetColumnAsync("ApplicationAPIUrl", "");
+
+            string json = await GetColumnAsync("RegisterUserFormConfig", "");
             if (!string.IsNullOrWhiteSpace(json))
             {
-                ApplicationAPIConfig = JsonConvert.DeserializeObject<ApplicationAPIConfig>(json);
+                RegisterUserFormConfig = JsonConvert.DeserializeObject<RegisterUserFormConfig>(json);
             }
         }
 

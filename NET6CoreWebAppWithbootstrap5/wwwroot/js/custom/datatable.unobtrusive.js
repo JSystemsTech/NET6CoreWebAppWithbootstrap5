@@ -350,15 +350,58 @@
             options.initComplete = function (settings, json) {
                 var api = this.api();
                 if (tableData.appendForm === true) {
-                    //var searchInputGroup = table.closest('.dataTables_wrapper').find('.dataTables_filter .input-group');
-                    //var formDropdownEl = $('<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Filter</button>');
-                    //var formDropdownMenuEl = $('<di class="dropdown-menu dropdown-menu-end"></div>');
-                    //formDropdownMenuEl.append($(tableData.dtForm));
-                    //searchInputGroup.append(formDropdownEl).append(formDropdownMenuEl);
+                    var placement = tableData.formPlacement || 'table';
+                    if ((placement === 'modal' || placement === 'offcanvas') &&
+                        (table.closest('.modal-body').length > 0 || table.closest('.offcanvas-body').length > 0)) {
+                        placement = 'table' // don't render a modal/offcanvas in another modal/offcanvas
+                    }
+                    if (placement === 'toolbar') {
+                        var searchInputGroup = table.closest('.dataTables_wrapper').find('.dataTables_filter .input-group');
+                        var formDropdownEl = $('<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Filter</button>');
+                        var formDropdownMenuEl = $('<di class="dropdown-menu dropdown-menu-end"></div>');
+                        formDropdownMenuEl.append($(tableData.dtForm));
+                        searchInputGroup.append(formDropdownEl).append(formDropdownMenuEl);
+                        $(tableData.dtForm).bsShow();
+                    }
+                    else if (placement === 'modal') {
+                        var formWrapper = table.closest('.dataTables_wrapper').find('.dataTables_form_wrapper');
+                        var searchInputGroup = table.closest('.dataTables_wrapper').find('.dataTables_filter .input-group');
+                        var formModalBtn = $('<button class="btn btn-outline-secondary" type="button">Filter</button>');
+                        
+                        searchInputGroup.append(formModalBtn);
+                        formModalBtn.serversideModalButton({
+                            size: 'sm',
+                            title: 'Data Table Filter',
+                            loading: 'Loading Data Table Filter',
+                            static: true,
+                            close: true,
+                            container: formWrapper,
+                            appendContentSelector: tableData.dtForm
+                        });
+                        $(tableData.dtForm).bsShow();
+                    }
+                    else if (placement === 'offcanvas') {
+                        var formWrapper = table.closest('.dataTables_wrapper').find('.dataTables_form_wrapper');
+                        var searchInputGroup = table.closest('.dataTables_wrapper').find('.dataTables_filter .input-group');
+                        var formOffcanvasBtn = $('<button class="btn btn-outline-secondary" type="button">Filter</button>');
 
-                    var formWrapper = table.closest('.dataTables_wrapper').find('.dataTables_form_wrapper');
-                    formWrapper.append($(tableData.dtForm));
-                    $(tableData.dtForm).bsShow();
+                        searchInputGroup.append(formOffcanvasBtn);
+                        formOffcanvasBtn.serversideOffcanvasButton({
+                            placement: 'start',
+                            title: 'Data Table Filter',
+                            loading: 'Loading Data Table Filter',
+                            static: true,
+                            close: true,
+                            container: formWrapper,
+                            appendContentSelector: tableData.dtForm
+                        });
+                        $(tableData.dtForm).bsShow();
+                    }
+                    else {
+                        var formWrapper = table.closest('.dataTables_wrapper').find('.dataTables_form_wrapper');
+                        formWrapper.addClass('border-bottom mb-2').append($(tableData.dtForm));
+                        $(tableData.dtForm).bsShow();
+                    }                    
                 }
 
 

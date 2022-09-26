@@ -10,17 +10,17 @@
     }
   ],
   "paths": {
-    "/api/APIConfig/UpdateApplicationAPIConfig": {
+    "/api/APIConfig/RegisterUserFormConfig": {
       "post": {
         "tags": [
           "APIConfig"
         ],
-        "operationId": "UpdateApplicationAPIConfig",
+        "operationId": "RegisterUserFormConfig",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApplicationAPIConfig"
+                "$ref": "#/components/schemas/RegisterUserFormConfig"
               }
             }
           }
@@ -328,23 +328,6 @@
         },
         "additionalProperties": false
       },
-      "ApplicationAPIConfig": {
-        "type": "object",
-        "properties": {
-          "baseUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RegistrationFormFieldConfig"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ApplicationInfo": {
         "type": "object",
         "properties": {
@@ -412,8 +395,12 @@
             "type": "string",
             "nullable": true
           },
-          "applicationAPIConfig": {
-            "$ref": "#/components/schemas/ApplicationAPIConfig"
+          "applicationAPIUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "registerUserFormConfig": {
+            "$ref": "#/components/schemas/RegisterUserFormConfig"
           },
           "hasError": {
             "type": "boolean",
@@ -530,6 +517,10 @@
           "ssO_Header": {
             "type": "string",
             "nullable": true
+          },
+          "applicationAPIUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -596,6 +587,19 @@
             "type": "array",
             "items": {
               "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterUserFormConfig": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegistrationFormFieldConfig"
             },
             "nullable": true
           }

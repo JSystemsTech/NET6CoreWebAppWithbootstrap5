@@ -22,8 +22,8 @@ namespace NET6CoreWebAppWithbootstrap5.Models.Home
         public string DefaultRedirectUrl { get; set; } = "";
         [Display(Name = "SSO Url")]
         public string? SsoUrl { get; set; }
-        [Display(Name = "Registration Url")]
-        public string? RegistrationUrl { get; set; }
+        [Display(Name = "Application API Url")]
+        public string? ApplicationAPIUrl { get; set; }
         [Display(Name = "Require Registration")]
         public bool RequireRegistration { get; set; }
         
@@ -47,7 +47,7 @@ namespace NET6CoreWebAppWithbootstrap5.Models.Home
             DefaultRedirectUrl = appInfo.DefaultRedirectUrl;
             SsoUrl = appInfo.SsoUrl;
             SsO_Header = appInfo.SsO_Header;
-            RegistrationUrl = appInfo.RegistrationUrl;
+            ApplicationAPIUrl = appInfo.ApplicationAPIUrl;
             RequireRegistration = appInfo.RequireRegistration;
             LogoFileName = appInfo.LogoFileName;
             LogoFileContentType = appInfo.LogoFileContentType;

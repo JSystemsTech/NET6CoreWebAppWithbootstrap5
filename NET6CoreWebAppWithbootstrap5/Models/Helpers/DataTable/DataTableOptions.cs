@@ -13,6 +13,7 @@ namespace NET6CoreWebAppWithbootstrap5.Models.Helpers.DataTable
         public string? OptionsUrl { get; set; }
         public string? Form { get; set; }
         public bool AppendForm { get; set; }
+        public string? FormPlacement { get; set; }
         public string? Id { get; set; }
     }
     public class DataTableViewVM<T> : DataTableViewVM where T : class

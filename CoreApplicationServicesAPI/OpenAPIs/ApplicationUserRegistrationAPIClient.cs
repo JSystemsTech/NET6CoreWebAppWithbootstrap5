@@ -1,4 +1,5 @@
 ﻿using CoreApplicationServicesAPI;
+using CoreApplicationServicesAPI.DomainLayer.Models.Data;
 using CoreApplicationServicesAPI.Models;
 using System.Net.Http.Headers;
 
@@ -26,12 +27,12 @@ namespace ApplicationUserRegistrationAPI
             }
             return null;
         }
-        private async Task<bool> TryConfigureAccessTokenForAppAsync(string appId, ApplicationAPIConfig config)
+        private async Task<bool> TryConfigureAccessTokenForAppAsync(string appId, ApplicationInfo appInfo)
         {
             var accessToken = GetAccessToken(appId);
             if (accessToken == null || accessToken.RefreshOnUtc <= DateTime.UtcNow)
             {
-                var response = await AuthenticateAsync(config);
+                var response = await AuthenticateAsync(appInfo);
                 if (!response.HasError)
                 {
                     return false;
@@ -49,27 +50,27 @@ namespace ApplicationUserRegistrationAPI
             _AccessToken = accessToken;
             return true;
         }
-        private async Task<APIAccessTokenAPIResponse> AuthenticateAsync(ApplicationAPIConfig config)
+        private async Task<APIAccessTokenAPIResponse> AuthenticateAsync(ApplicationInfo appInfo)
         {
-            _baseUrl = config.BaseUrl;
+            _baseUrl = appInfo.ApplicationAPIUrl;
             var response = await AuthenticateAsync(ApplicationConfiguration.ApplicationSettings.AppId);
 
             return response;
         }
-        public async Task<BooleanAPIResponse> RegisterUserAsync(string appId, RegisterUserParameters parameters, ApplicationAPIConfig config)
+        public async Task<BooleanAPIResponse> RegisterUserAsync(string appId, RegisterUserParameters parameters, ApplicationInfo appInfo)
         {
-            if(await TryConfigureAccessTokenForAppAsync(appId, config))
+            if(await TryConfigureAccessTokenForAppAsync(appId, appInfo))
             {
-                _baseUrl = config.BaseUrl;
+                _baseUrl = appInfo.ApplicationAPIUrl;
                 return  await RegisterUserAsync(parameters);
             }
             return new BooleanAPIResponse() { ErrorMessage= "Unable to configure access token for application API"};
         }
-        public async Task<BooleanAPIResponse> UserIsRegisteredAsync(string appId, RegisterUserParameters parameters, ApplicationAPIConfig config)
+        public async Task<BooleanAPIResponse> UserIsRegisteredAsync(string appId, RegisterUserParameters parameters, ApplicationInfo appInfo)
         {
-            if (await TryConfigureAccessTokenForAppAsync(appId, config))
+            if (await TryConfigureAccessTokenForAppAsync(appId, appInfo))
             {
-                _baseUrl = config.BaseUrl;
+                _baseUrl = appInfo.ApplicationAPIUrl;
                 return await UserIsRegisteredAsync(parameters);
             }
             return new BooleanAPIResponse() { ErrorMessage = "Unable to configure access token for application API" };

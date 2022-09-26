@@ -83,8 +83,13 @@
 			data: {},
 			alert: 'alert',
 			reload: true,
+			appendContentSelector: null,
 			onLoad: function () { }
 		}, options || {});
+		if (options.appendContentSelector != null) {
+			options.url = false;
+			options.reload = false;
+		}
 		if (container.find('>.modal').length > 0) {
 			if (options.reload === false) {
 				var currentModal = bootstrap.Modal.getInstance(container.find('>.modal')[0]);
@@ -95,17 +100,18 @@
 			return;
 		}
 		
-		if (options.url && typeof options.url === 'string') {
-			$.post($.ServersideModal.defaults.url, buildPostData(options)).done(function (modalHtml) {
-				container.html(modalHtml);
-				var modal = new bootstrap.Modal(container.find('.modal')[0]);
-				modal.show();
+		
+		$.post($.ServersideModal.defaults.url, buildPostData(options)).done(function (modalHtml) {
+			container.html(modalHtml);
+			var modal = new bootstrap.Modal(container.find('.modal')[0]);
+			modal.show();
+			if (options.url && typeof options.url === 'string') {
 				$.post(options.url, options.data).done(function (modalBodyHtml) {
 					var modalBody = container.find('.modal-body');
 					var modalFooter = container.find('.modal-footer');
 					modalBody.html(modalBodyHtml);
 
-					var modalFooterContent = modalBody.find($.ServersideModal.defaults.modalFooterContentSelector);					
+					var modalFooterContent = modalBody.find($.ServersideModal.defaults.modalFooterContentSelector);
 					if (modalFooter.length > 0 && modalFooterContent.length > 0) {
 						modalFooter.append(modalFooterContent);
 					} else {
@@ -114,10 +120,10 @@
 					container.OnLoadContent();
 					if (typeof options.onLoad === 'function') {
 						options.onLoad(modal, container.find('.modal'));
-                    }
+					}
 				}).fail(function (jqXHR, textStatus, errorThrown) {
 					if (container.find('>.modal.show').length > 0) {
-						container.find('>.modal').one('hidden.bs.modal', function () {							
+						container.find('>.modal').one('hidden.bs.modal', function () {
 							disposeModal(container, modal);
 							innerAlert(errorThrown);
 						});
@@ -125,13 +131,22 @@
 					} else {
 						disposeModal(container, modal);
 						innerAlert(errorThrown);
-					}		
-															
-				});				
-			}).fail(function (jqXHR, textStatus, errorThrown) {
-				innerAlert(errorThrown);
-			});
-        }
+					}
+
+				});
+
+			} else {
+				var modalBody = container.find('.modal-body');
+				modalBody.empty();
+				$(options.appendContentSelector).appendTo(modalBody);
+				if (typeof options.onLoad === 'function') {
+					options.onLoad(modal, container.find('.modal'));
+				}
+            }
+
+		}).fail(function (jqXHR, textStatus, errorThrown) {
+			innerAlert(errorThrown);
+		});
 	};
 
 	$.fn.serversideModal = ServersideModal;
@@ -139,11 +154,18 @@
 	var ServersideModalButton = function (options) {
 		var button = this;
 		options = $.extend(true, options || {}, button.data());
-		var container = $('<div><div>');
-		$('body').append(container);
-		button.on('click', function () {
-			container.serversideModal(options);
-		});		
+		if (options.container != null) {
+			button.on('click', function () {
+				options.container.serversideModal(options);
+			});
+		} else {
+			var container = $('<div><div>');
+			$('body').append(container);
+			button.on('click', function () {
+				container.serversideModal(options);
+			});	
+        }
+			
 	};
 	$.fn.serversideModalButton = ServersideModalButton;
 }));

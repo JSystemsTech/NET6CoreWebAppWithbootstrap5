@@ -22,6 +22,7 @@ namespace NET6CoreWebAppWithbootstrap5.Services.Configuration
     {
         public string AuthenticationTokenService { get; set; } = "";
         public string CoreApplicationServicesAPI { get; set; } = "";
+        public string WebAppAPI { get; set; } = "";
     }
     public enum ApplicationEnvironment
     {

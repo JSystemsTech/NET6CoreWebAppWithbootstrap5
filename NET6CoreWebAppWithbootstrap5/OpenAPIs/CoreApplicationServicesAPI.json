@@ -10,17 +10,21 @@
     }
   ],
   "paths": {
-    "/api/APIConfig/UpdateApplicationAPIConfig": {
+    "/api/APIConfig/RegisterUserFormConfig": {
       "post": {
         "tags": [
           "APIConfig"
         ],
-        "operationId": "UpdateApplicationAPIConfig",
+        "operationId": "RegisterUserFormConfig",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApplicationAPIConfig"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/RegisterUserFormConfig"
+                  }
+                ]
               }
             }
           }
@@ -78,7 +82,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApplicationInfoParameters"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ApplicationInfoParameters"
+                  }
+                ]
               }
             }
           }
@@ -232,7 +240,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterUserParameters"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/RegisterUserParameters"
+                  }
+                ]
               }
             }
           }
@@ -270,7 +282,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterUserParameters"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/RegisterUserParameters"
+                  }
+                ]
               }
             }
           }
@@ -314,7 +330,13 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/APIAccessToken"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/APIAccessToken"
+              }
+            ],
+            "nullable": true,
+            "readOnly": true
           },
           "hasError": {
             "type": "boolean",
@@ -324,23 +346,6 @@
             "type": "string",
             "nullable": true,
             "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ApplicationAPIConfig": {
-        "type": "object",
-        "properties": {
-          "baseUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RegistrationFormFieldConfig"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -412,8 +417,17 @@
             "type": "string",
             "nullable": true
           },
-          "applicationAPIConfig": {
-            "$ref": "#/components/schemas/ApplicationAPIConfig"
+          "applicationAPIUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "registerUserFormConfig": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RegisterUserFormConfig"
+              }
+            ],
+            "nullable": true
           },
           "hasError": {
             "type": "boolean",
@@ -431,7 +445,13 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/ApplicationInfo"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApplicationInfo"
+              }
+            ],
+            "nullable": true,
+            "readOnly": true
           },
           "hasError": {
             "type": "boolean",
@@ -530,6 +550,10 @@
           "ssO_Header": {
             "type": "string",
             "nullable": true
+          },
+          "applicationAPIUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -571,7 +595,13 @@
         "type": "object",
         "properties": {
           "value": {
-            "$ref": "#/components/schemas/ConnectionStringInfo"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectionStringInfo"
+              }
+            ],
+            "nullable": true,
+            "readOnly": true
           },
           "hasError": {
             "type": "boolean",
@@ -596,6 +626,19 @@
             "type": "array",
             "items": {
               "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterUserFormConfig": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegistrationFormFieldConfig"
             },
             "nullable": true
           }

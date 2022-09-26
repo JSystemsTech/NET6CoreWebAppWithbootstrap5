@@ -329,12 +329,13 @@ namespace NET6CoreWebAppWithbootstrap5.Controllers
         }
         public IActionResult DataTableExample()
         {
-            return View();
+            return View(new SampleDataTableModelVM());
         }
         public IActionResult SampleModal()
         {
             return PartialView();
         }
+
         public async Task<IActionResult> ApplicationSettings()
         {
             ApplicationInfo appInfo = (await ApplicationServices.CoreApplicationServicesAPIClient.GetApplicationInfoAsync(ApplicationConfiguration.ApplicationSettings.AppId)).Value;
@@ -359,7 +360,7 @@ namespace NET6CoreWebAppWithbootstrap5.Controllers
                 DefaultRedirectUrl = vm.DefaultRedirectUrl,
                 SsoUrl = vm.SsoUrl,
                 SsO_Header = vm.SsO_Header,
-                RegistrationUrl = vm.RegistrationUrl,
+                ApplicationAPIUrl = vm.ApplicationAPIUrl,
                 RequireRegistration = vm.RequireRegistration
             };
             if (vm.ApplicationLogo is IFormFile file)

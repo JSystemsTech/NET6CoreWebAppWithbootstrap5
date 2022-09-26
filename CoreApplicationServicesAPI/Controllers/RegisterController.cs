@@ -39,9 +39,9 @@ namespace CoreApplicationServicesAPI.Controllers
                 }
                 if (applicationInfo is ApplicationInfo)
                 {
-                    if (applicationInfo.ApplicationAPIConfig != null)
+                    if (applicationInfo.ApplicationAPIUrl != null)
                     {
-                        var apiResponse = _ApplicationUserRegistrationAPIClient.UserIsRegisteredAsync(appId, parameters, applicationInfo.ApplicationAPIConfig).GetAwaiter().GetResult();
+                        var apiResponse = _ApplicationUserRegistrationAPIClient.UserIsRegisteredAsync(appId, parameters, applicationInfo).GetAwaiter().GetResult();
                         if (apiResponse.HasError)
                         {
                             return ErrorResponse(apiResponse.ErrorMessage, false);
@@ -77,9 +77,9 @@ namespace CoreApplicationServicesAPI.Controllers
                 }
                 if (applicationInfo is ApplicationInfo)
                 {
-                    if (applicationInfo.ApplicationAPIConfig != null)
+                    if (applicationInfo.ApplicationAPIUrl != null)
                     {
-                        var apiResponse = _ApplicationUserRegistrationAPIClient.RegisterUserAsync(appId, parameters, applicationInfo.ApplicationAPIConfig).GetAwaiter().GetResult();
+                        var apiResponse = _ApplicationUserRegistrationAPIClient.RegisterUserAsync(appId, parameters, applicationInfo).GetAwaiter().GetResult();
                         if (apiResponse.HasError)
                         {
                             return ErrorResponse(apiResponse.ErrorMessage, false);

@@ -17,6 +17,8 @@ namespace CoreApplicationServicesAPI.DomainLayer.Models.Parameters
         public string? LogoFileContentType { get; set; }
         public byte[]? LogoFileData { get; set; }
 
-        public string? SSO_Header { get; set; } 
+        public string? SSO_Header { get; set; }
+
+        public string? ApplicationAPIUrl { get; set; }
     }
 }

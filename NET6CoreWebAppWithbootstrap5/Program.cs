@@ -8,6 +8,7 @@ using NET6CoreWebAppWithbootstrap5.Models;
 using NET6CoreWebAppWithbootstrap5.Services;
 using NET6CoreWebAppWithbootstrap5.Services.Authentication;
 using NET6CoreWebAppWithbootstrap5.Services.Configuration;
+using WebAppAPI;
 using Westwind.AspNetCore.Markdown;
 
 //var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,9 @@ builder.Services.AddHttpClient<AuthenticationTokenServiceClient>().ConfigureHttp
 });
 builder.Services.AddHttpClient<CoreApplicationServicesAPIClient>().ConfigureHttpClient(options => {
     options.BaseAddress = new Uri(ApplicationConfiguration.OpenAPIUrlsSettings.CoreApplicationServicesAPI);
+});
+builder.Services.AddHttpClient<WebAppAPIClient>().ConfigureHttpClient(options => {
+    options.BaseAddress = new Uri(ApplicationConfiguration.OpenAPIUrlsSettings.WebAppAPI);
 });
 
 // Add services to the container.

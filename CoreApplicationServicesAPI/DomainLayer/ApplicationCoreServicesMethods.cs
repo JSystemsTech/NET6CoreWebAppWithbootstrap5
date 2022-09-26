@@ -33,12 +33,13 @@ namespace CoreApplicationServicesAPI.DomainLayer
                 p.Add("LogoFileName", p.Factory.Create(m => m.appInfo.LogoFileName));
                 p.Add("LogoFileContentType", p.Factory.Create(m => m.appInfo.LogoFileContentType));
                 p.Add("LogoFileData", p.Factory.Create(m => m.appInfo.LogoFileData));
+                p.Add("ApplicationAPIUrl", p.Factory.Create(m => m.appInfo.ApplicationAPIUrl));
             },
             v => {
                 v.Add(v.Rules.Required(m => m.appId));
             }); 
-        public static readonly IDbCommandMethod<(string appId, ApplicationAPIConfig config)> UpdateApplicationInfoApplicationAPIConfig
-            = ApplicationCoreServicesDbConnection.UpdateApplicationInfoApplicationAPIConfig.CreateMethod<(string appId, ApplicationAPIConfig config)>(
+        public static readonly IDbCommandMethod<(string appId, RegisterUserFormConfig config)> UpdateApplicationInfoRegisterUserFormConfig
+            = ApplicationCoreServicesDbConnection.UpdateApplicationInfoRegisterUserFormConfig.CreateMethod<(string appId, RegisterUserFormConfig config)>(
             p =>
             {
                 p.Add("AppId", p.Factory.Create(m => m.appId));

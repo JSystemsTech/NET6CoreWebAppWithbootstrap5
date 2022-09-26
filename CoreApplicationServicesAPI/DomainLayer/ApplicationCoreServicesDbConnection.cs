@@ -23,7 +23,7 @@ namespace CoreApplicationServicesAPI.DomainLayer
 
         public static IDbCommandConfig GetApplicationInfo = Dbo.CreateFetchCommand("GetApplicationInfo", "Get Application Info");
         public static IDbCommandConfig UpdateApplicationInfo = Dbo.CreateFetchCommand("UpdateApplicationInfo", "Update Application Info");
-        public static IDbCommandConfig UpdateApplicationInfoApplicationAPIConfig = Dbo.CreateFetchCommand("UpdateApplicationInfo_ApplicationAPIConfig", "Update Application Info Application API Config");
+        public static IDbCommandConfig UpdateApplicationInfoRegisterUserFormConfig = Dbo.CreateFetchCommand("UpdateApplicationInfo_RegisterUserFormConfig", "Update Application Info Register User Form Config");
         public static IDbCommandConfig GetConnectionStringSettings = Dbo.CreateFetchCommand("GetConnectionStringSettings", "Get Connection String Settings");
     }
 }

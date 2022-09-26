@@ -17,14 +17,14 @@ namespace CoreApplicationServicesAPI.Controllers
         public APIConfigController(IServiceProvider services)
             : base(services) { }
 #if OperationId
-        [HttpPost("UpdateApplicationAPIConfig", Name = nameof(UpdateApplicationAPIConfig))]
+        [HttpPost("RegisterUserFormConfig", Name = nameof(RegisterUserFormConfig))]
 #else
-        [HttpPost("UpdateApplicationAPIConfig")]
+        [HttpPost("RegisterUserFormConfig")]
 #endif
         [SwaggerResponse((int)HttpStatusCode.OK, "Check to see if user is registered for Application", typeof(APIResponse<ApplicationInfo>))]
         [Produces(MediaTypeNames.Application.Json)]
         [Consumes(MediaTypeNames.Application.Json)]
-        public IActionResult UpdateApplicationAPIConfig(ApplicationAPIConfig config)
+        public IActionResult RegisterUserFormConfig(RegisterUserFormConfig config)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace CoreApplicationServicesAPI.Controllers
                 {
                     return ErrorResponse("Missing 'appId' on header", ApplicationInfo.Default);
                 }
-                var updateResponse = DomainFacade.UpdateApplicationInfoApplicationAPIConfig(appId, config);
+                var updateResponse = DomainFacade.UpdateApplicationInfoRegisterUserFormConfig(appId, config);
                 if (updateResponse.HasError)
                 {
                     return ErrorResponse(updateResponse, ApplicationInfo.Default);

@@ -61,7 +61,7 @@ builder.Services.AddSwaggerGen(options =>
             new string[]{}
         }
     });
-
+    options.UseAllOfToExtendReferenceSchemas();
 
 });
 builder.Services.AddScoped<ConnectionStringManager>();

@@ -9,7 +9,14 @@
         @Html.AntiForgeryToken()
     </form>
 }
-@Html.Table(new { @data_type = "datatable", @data_dt_options_url = Url.Action("GetDataTableOptions", new { key = Model.OptionsUrl }), @data_dt_form = string.IsNullOrWhiteSpace(Model.Form) ? $"#{formId}": Model.Form, @data_append_form=Model.AppendForm.ToString().ToLower(), @id = tableId, @class = "w-100 my-0 table-striped table-bordered table-sm" })
+@Html.Table(new { 
+    @data_type = "datatable", 
+    @data_dt_options_url = Url.Action("GetDataTableOptions", new { key = Model.OptionsUrl }), 
+    @data_dt_form = string.IsNullOrWhiteSpace(Model.Form) ? $"#{formId}": Model.Form, 
+    @data_append_form=Model.AppendForm.ToString().ToLower(),
+    @data_form_placement=string.IsNullOrWhiteSpace(Model.FormPlacement) ? "top": Model.FormPlacement,
+    @id = tableId, 
+    @class = "w-100 my-0 table-striped table-bordered table-sm" })
 
 @if (!string.IsNullOrWhiteSpace(Model.OptionsJson))
 {

@@ -1,9 +1,13 @@
-﻿@{
+﻿@model NET6CoreWebAppWithbootstrap5.Models.Home.SampleDataTableModelVM
+@{
     string FormId = Html.UniqueId();
 }
 <form id="@FormId" class="p-2 d-none">
-    @Html.AntiForgeryToken()    
-
+    @Html.AntiForgeryToken() 
+    
+    @Html.FormControlLabelFor(m=>m.DropdownValue)
+    @Html.FormControlDropDownListFor(m=> m.DropdownValue, Model.SelectList)
+    @Html.ValidationMessageFor(m=>m.DropdownValue)
 </form>
 <div class="row">
     <div class="col">
@@ -11,7 +15,8 @@
         {
         vm.Form = $"#{FormId}";
         vm.OptionsUrl = ViewBag.DataTableOptions.DataTableExampleDataOptions;
-        //vm.AppendForm = true;
+        vm.AppendForm = true;
+        vm.FormPlacement = "offcanvas";
         })
     </div>
 </div>

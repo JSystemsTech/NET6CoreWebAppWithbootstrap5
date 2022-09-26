@@ -39,9 +39,9 @@ namespace CoreApplicationServicesAPI.DomainLayer
         public static async Task<IDbResponse> UpdateApplicationInfoAsync(string appId, ApplicationInfoParameters applicationInfo)
         => await ApplicationCoreServicesMethods.UpdateApplicationInfo.ExecuteAsync((appId, applicationInfo));
 
-        public static IDbResponse UpdateApplicationInfoApplicationAPIConfig(string appId, ApplicationAPIConfig config)
-        => ApplicationCoreServicesMethods.UpdateApplicationInfoApplicationAPIConfig.Execute((appId, config));
-        public static async Task<IDbResponse> UpdateApplicationInfoApplicationAPIConfigAsync(string appId, ApplicationAPIConfig config)
-        => await ApplicationCoreServicesMethods.UpdateApplicationInfoApplicationAPIConfig.ExecuteAsync((appId, config));
+        public static IDbResponse UpdateApplicationInfoRegisterUserFormConfig(string appId, RegisterUserFormConfig config)
+        => ApplicationCoreServicesMethods.UpdateApplicationInfoRegisterUserFormConfig.Execute((appId, config));
+        public static async Task<IDbResponse> UpdateApplicationInfoRegisterUserFormConfigAsync(string appId, RegisterUserFormConfig config)
+        => await ApplicationCoreServicesMethods.UpdateApplicationInfoRegisterUserFormConfig.ExecuteAsync((appId, config));
     }
 }
